@@ -7,7 +7,14 @@ import { ArrowLeft } from 'lucide-react';
 
 export function ServicesHero() {
   return (
-    <section className="relative py-24 md:py-32 bg-primary">
+    <section className="relative py-24 md:py-32">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('https://www.shutterstock.com/image-photo/professional-barber-tools-arranged-neatly-600nw-2595347025.jpg')`,
+        }}
+      />
+      <div className="absolute inset-0 bg-primary/80" />
       <Container size="lg" className="relative z-10">
         <div className="text-center">
           <Button
