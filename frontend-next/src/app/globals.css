@@ -2,6 +2,7 @@
 
 @theme {
   /* === COLORS === */
+  --color-white: #010101;
   --color-primary: #111111;
   --color-primary-light: #1a1a1a;
   --color-primary-dark: #0a0a0a;
@@ -92,7 +93,7 @@ button {
 img, svg, video, canvas, audio, iframe, embed, object {
   display: block;
   vertical-align: middle;
-  color: var(--color-secondary);
+  color: #63ad8b;
 }
 
 img, video {
