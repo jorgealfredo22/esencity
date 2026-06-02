@@ -11,7 +11,7 @@ export function ServicesHero() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://www.shutterstock.com/image-photo/professional-barber-tools-arranged-neatly-600nw-2595347025.jpg')`,
+          backgroundImage: `url('https://wallpapers.com/images/hd/barber-shop-background-1vd4gzeiyvyg4ghl.jpg')`,
         }}
       />
       <div className="absolute inset-0 bg-primary/80" />
