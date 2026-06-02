@@ -2,17 +2,17 @@ export const siteConfig = {
   name: 'ESENCITY',
   description: 'La belleza, en manos expertas, se convierte en arte.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://esencity.com',
-  email: 'info@esencity.com',
-  phone: '+54 11 1234-5678',
+  email: 'esencitybarber@gmail.com',
+  phone: '320 4761569',
   address: {
-    street: 'Av. Principal 1234',
-    city: 'Buenos Aires',
-    country: 'Argentina',
+    street: 'Cra. 12 #11-43',
+    city: 'Sogamoso',
+    country: 'Boyacá, Colombia',
   },
   social: {
     instagram: 'https://instagram.com/esencity',
     facebook: 'https://facebook.com/esencity',
-    whatsapp: 'https://wa.me/541112345678',
+    whatsapp: 'https://wa.me/573204761569',
   },
   hours: {
     monday: '10:00 - 20:00',

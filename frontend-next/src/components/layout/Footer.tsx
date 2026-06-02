@@ -3,7 +3,7 @@ import { siteConfig } from '@/data/site';
 import { footerNavigation } from '@/data/navigation';
 import { BrandLogo } from '@/components/shared/BrandLogo';
 import { InstagramIcon, FacebookIcon, WhatsAppIcon } from '@/components/shared/SocialIcons';
-import { MapPin, Phone, Mail, Clock, Car } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const socialLinks = [
   { icon: InstagramIcon, href: siteConfig.social.instagram, label: 'Instagram' },
@@ -99,10 +99,7 @@ export function Footer() {
                 {siteConfig.address.city}, {siteConfig.address.country}
               </span>
             </div>
-            <div className="flex items-center gap-2 text-text-inverse-secondary/60 text-sm">
-              <Car className="w-4 h-4 text-secondary" />
-              <span>Contamos con Parqueadero Privado</span>
-            </div>
+            
           </div>
         </div>
 
