@@ -21,12 +21,12 @@ async function fetchServices(): Promise<ServiceCategory[]> {
         ...cat,
         services: cat.services.map((s) => ({
           ...s,
-          image: s.image
-            ? s.image.replace(
-                /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w(\d+)/,
-                '/api/apps-script/image?id=$1&sz=w$2'
-              )
-            : null,
+            image: s.image
+                ? s.image.replace(
+                    /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w\d+/,
+                    '/api/apps-script/image?id=$1&sz=w1200'
+                  )
+                : null,
         })),
       }));
     }
