@@ -1,7 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { SectionHeading } from '@/components/ui/SectionHeading';
+import { useInView } from '@/hooks/useInView';
 import { GalleryImage } from '@/types/gallery';
 import { Expand } from 'lucide-react';
 
@@ -17,40 +19,17 @@ const placeholderImages: GalleryImage[] = [
 
 export function StaticGallery() {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="galeria" ref={sectionRef} className="section-padding bg-surface">
+    <section id="galeria" ref={ref} className="section-padding bg-surface">
       <div className="container-custom">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <p className="text-secondary text-xs font-semibold tracking-widest uppercase mb-3">
-            Resultados Reales
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text font-display mb-4">
-            Ellos ya confiaron en Nosotros
-          </h2>
-          <p className="text-text-secondary text-base md:text-lg">
-            Conocé los resultados de quienes ya vivieron la experiencia Esencity.
-          </p>
-        </div>
+        <SectionHeading
+          subtitle="Resultados Reales"
+          title="Ellos ya confiaron en Nosotros"
+          description="Conocé los resultados de quienes ya vivieron la experiencia Esencity."
+          className="max-w-3xl mx-auto mb-12 md:mb-16"
+        />
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {placeholderImages.map((image, index) => (
@@ -58,7 +37,7 @@ export function StaticGallery() {
               key={image.id}
               onClick={() => setSelectedImage(image)}
               className={`relative aspect-square rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
               style={{ transitionDelay: `${index * 50}ms` }}
             >
@@ -68,7 +47,7 @@ export function StaticGallery() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-colors flex items-center justify-center">
-                <Expand className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                <Expand className="w-6 h-6 text-text-inverse opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </button>
           ))}
@@ -92,7 +71,7 @@ export function StaticGallery() {
             </div>
           </div>
           <button
-            className="absolute top-4 right-4 w-10 h-10 bg-surface-elevated rounded-full flex items-center justify-center text-text hover:bg-secondary hover:text-white transition-colors"
+            className="absolute top-4 right-4 w-10 h-10 bg-surface-elevated rounded-full flex items-center justify-center text-text hover:bg-secondary hover:text-text-inverse transition-colors"
             onClick={() => setSelectedImage(null)}
           >
             ✕

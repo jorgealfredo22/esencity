@@ -1,6 +1,14 @@
 const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || '';
 
+function isConfigured() {
+  return APPS_SCRIPT_URL.length > 0 && !APPS_SCRIPT_URL.includes('YOUR_SCRIPT_ID');
+}
+
 export async function fetchFromAppsScript(endpoint: string, params?: Record<string, string>) {
+  if (!isConfigured()) {
+    throw new Error('Apps Script URL no configurada');
+  }
+
   const url = new URL(APPS_SCRIPT_URL);
   url.searchParams.set('action', endpoint);
 
@@ -30,6 +38,10 @@ export async function fetchFromAppsScript(endpoint: string, params?: Record<stri
 }
 
 export async function postToAppsScript(endpoint: string, data: Record<string, unknown>) {
+  if (!isConfigured()) {
+    throw new Error('Apps Script URL no configurada');
+  }
+
   try {
     const response = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',

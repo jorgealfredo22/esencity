@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { servicesData } from '@/data/services';
 import { Container } from '@/components/ui/Container';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ServiceCard } from './ServiceCard';
 import { cn } from '@/lib/utils';
 
@@ -14,14 +15,10 @@ export function ServicesGrid() {
   return (
     <section className="section-padding bg-surface">
       <Container size="lg">
-        <div className="text-center mb-12">
-          <p className="text-secondary text-xs font-semibold tracking-widest uppercase mb-3">
-            Explorá
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text font-display mb-4">
-            Todos nuestros servicios
-          </h2>
-        </div>
+        <SectionHeading
+          subtitle="Explorá"
+          title="Todos nuestros servicios"
+        />
 
         <div className="flex flex-wrap justify-center gap-2 mb-10">
           {servicesData.map((category) => (
@@ -31,7 +28,7 @@ export function ServicesGrid() {
               className={cn(
                 'px-5 py-2 rounded-full text-xs font-medium tracking-wider uppercase transition-colors',
                 activeCategory === category.id
-                  ? 'bg-secondary text-white'
+                  ? 'bg-secondary text-text-inverse'
                   : 'bg-surface-alt text-text-secondary hover:bg-border'
               )}
             >
