@@ -21,7 +21,7 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/50 to-primary" />
 
-      <div className="container-custom relative z-10 text-center px-4 py-20">
+      <div className="container-custom relative z-10 flex flex-col items-center justify-center text-center px-4">
         <div
           className={`transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
