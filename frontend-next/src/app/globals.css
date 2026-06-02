@@ -89,10 +89,15 @@ button {
   cursor: pointer;
 }
 
-img {
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  vertical-align: middle;
+  color: var(--color-secondary);
+}
+
+img, video {
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 input,
