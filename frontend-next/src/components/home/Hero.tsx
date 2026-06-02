@@ -30,7 +30,8 @@ export function Hero() {
           <img
             src="/brand/imagotipo.svg"
             alt={siteConfig.name}
-            className="h-32 md:h-44 lg:h-56 mx-auto mb-6 md:mb-8 brightness-0 invert"
+            className="w-auto mx-auto mb-6 md:mb-8 brightness-0 invert"
+            style={{ height: 'clamp(220px, 18vw, 420px)' }}
           />
         </div>
 
