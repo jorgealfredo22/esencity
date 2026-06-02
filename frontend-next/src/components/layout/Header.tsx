@@ -46,6 +46,7 @@ export function Header() {
           ? 'bg-primary/95 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
+      style={{ color: 'var(--color-text-inverse)' }}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -53,7 +54,7 @@ export function Header() {
             <img
               src="/brand/imagotipo.svg"
               alt={siteConfig.name}
-              className="h-7 md:h-9 brightness-0 invert"
+              className="h-6 md:h-8 brightness-0 invert"
             />
           </Link>
 
@@ -62,7 +63,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-xs font-medium tracking-widest uppercase text-text-inverse/80 hover:text-secondary transition-colors"
+                className="text-xs font-medium tracking-widest uppercase opacity-80 hover:opacity-100 hover:text-secondary transition-colors"
               >
                 {item.label}
               </Link>
@@ -75,7 +76,7 @@ export function Header() {
                 href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-text-inverse/60 hover:text-secondary transition-colors"
+                className="p-2 opacity-60 hover:opacity-100 hover:text-secondary transition-colors"
                 aria-label="Instagram"
               >
                 <InstagramIcon />
@@ -84,7 +85,7 @@ export function Header() {
                 href={siteConfig.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-text-inverse/60 hover:text-secondary transition-colors"
+                className="p-2 opacity-60 hover:opacity-100 hover:text-secondary transition-colors"
                 aria-label="Facebook"
               >
                 <FacebookIcon />
@@ -93,7 +94,7 @@ export function Header() {
                 href={siteConfig.social.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-text-inverse/60 hover:text-secondary transition-colors"
+                className="p-2 opacity-60 hover:opacity-100 hover:text-secondary transition-colors"
                 aria-label="WhatsApp"
               >
                 <WhatsAppIcon />
@@ -109,7 +110,7 @@ export function Header() {
           </div>
 
           <button
-            className="lg:hidden p-2 text-text-inverse"
+            className="lg:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -125,7 +126,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-6 py-3 text-text-inverse/80 hover:text-secondary transition-colors uppercase tracking-widest text-xs"
+                className="px-6 py-3 opacity-80 hover:opacity-100 hover:text-secondary transition-colors uppercase tracking-widest text-xs"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}
@@ -136,7 +137,7 @@ export function Header() {
                 href={siteConfig.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-text-inverse/60 hover:text-secondary transition-colors"
+                className="p-2 opacity-60 hover:opacity-100 hover:text-secondary transition-colors"
                 aria-label="Instagram"
               >
                 <InstagramIcon />
@@ -145,7 +146,7 @@ export function Header() {
                 href={siteConfig.social.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-text-inverse/60 hover:text-secondary transition-colors"
+                className="p-2 opacity-60 hover:opacity-100 hover:text-secondary transition-colors"
                 aria-label="Facebook"
               >
                 <FacebookIcon />
@@ -154,7 +155,7 @@ export function Header() {
                 href={siteConfig.social.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-text-inverse/60 hover:text-secondary transition-colors"
+                className="p-2 opacity-60 hover:opacity-100 hover:text-secondary transition-colors"
                 aria-label="WhatsApp"
               >
                 <WhatsAppIcon />

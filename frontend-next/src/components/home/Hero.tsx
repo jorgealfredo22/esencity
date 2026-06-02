@@ -30,7 +30,7 @@ export function Hero() {
           <img
             src="/brand/imagotipo.svg"
             alt={siteConfig.name}
-            className="h-20 md:h-28 lg:h-36 mx-auto mb-6 md:mb-8"
+            className="h-12 md:h-16 lg:h-20 mx-auto mb-6 md:mb-8"
           />
         </div>
 
@@ -43,7 +43,7 @@ export function Hero() {
         </h1>
 
         <p
-          className={`text-lg md:text-xl text-text-inverse/80 max-w-2xl mx-auto mb-10 font-light leading-relaxed transition-all duration-700 delay-300 ${
+          className={`text-lg md:text-xl text-text-inverse opacity-80 max-w-2xl mx-auto mb-10 font-light leading-relaxed transition-all duration-700 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
