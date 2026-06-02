@@ -50,20 +50,11 @@ export function Header() {
     >
       <div className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-
           <Link href="/" className="flex items-center">
             <img
               src="/brand/imagotipo.svg"
               alt={siteConfig.name}
-              className="h-2 md:h-3 w-auto object-contain brightness-0 invert"
-              style={{ height: '60px' }}
+              className="h-6 md:h-7 brightness-0 invert"
             />
           </Link>
 
