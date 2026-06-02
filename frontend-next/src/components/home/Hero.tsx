@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { BrandLogo } from '@/components/shared/BrandLogo';
 import { siteConfig } from '@/data/site';
 
 export function Hero() {
@@ -27,10 +28,8 @@ export function Hero() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <img
-            src="/brand/imagotipo.svg"
-            alt={siteConfig.name}
-            className="w-auto mx-auto mb-6 md:mb-8 brightness-0 invert"
+          <BrandLogo
+            className="w-auto mx-auto mb-6 md:mb-8"
             style={{ height: 'clamp(220px, 18vw, 420px)' }}
           />
         </div>

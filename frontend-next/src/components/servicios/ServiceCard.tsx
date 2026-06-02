@@ -1,5 +1,6 @@
 import { Service } from '@/types/service';
 import { formatPrice } from '@/lib/utils';
+import { siteConfig } from '@/data/site';
 import { Clock } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
@@ -32,7 +33,7 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
               </span>
             )}
           </div>
-          <Button variant="ghost" size="sm" href="https://wa.me/541112345678">
+          <Button variant="ghost" size="sm" href={siteConfig.social.whatsapp}>
             Reservar
           </Button>
         </div>
@@ -68,7 +69,7 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
               </span>
             )}
           </div>
-          <Button variant="primary" size="sm" href="https://wa.me/541112345678">
+          <Button variant="primary" size="sm" href={siteConfig.social.whatsapp}>
             Reservar
           </Button>
         </div>

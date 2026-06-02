@@ -2,6 +2,7 @@
 
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ArrowLeft } from 'lucide-react';
 
 export function ServicesHero() {
@@ -17,15 +18,12 @@ export function ServicesHero() {
           >
             Volver al inicio
           </Button>
-          <p className="text-secondary text-xs font-semibold tracking-widest uppercase mb-3">
-            Nuestros Servicios
-          </p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-text-inverse font-display mb-4">
-            Descubrí el arte de tu belleza
-          </h1>
-          <p className="text-lg text-text-inverse-secondary/70 max-w-xl mx-auto">
-            Agendá tu cita y descubrí por qué la belleza, en manos expertas, se convierte en arte.
-          </p>
+          <SectionHeading
+            subtitle="Nuestros Servicios"
+            title="Descubrí el arte de tu belleza"
+            description="Agendá tu cita y descubrí por qué la belleza, en manos expertas, se convierte en arte."
+            light
+          />
         </div>
       </Container>
     </section>

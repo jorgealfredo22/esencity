@@ -18,9 +18,9 @@ interface ButtonProps {
 }
 
 const variantStyles = {
-  primary: 'bg-secondary text-white hover:bg-secondary-dark',
-  secondary: 'bg-primary text-white hover:bg-primary-light',
-  outline: 'border border-secondary text-secondary hover:bg-secondary hover:text-white',
+  primary: 'bg-secondary text-text-inverse hover:bg-secondary-dark',
+  secondary: 'bg-primary text-text-inverse hover:bg-primary-light',
+  outline: 'border border-secondary text-secondary hover:bg-secondary hover:text-text-inverse',
   ghost: 'text-secondary hover:bg-secondary-muted',
 };
 

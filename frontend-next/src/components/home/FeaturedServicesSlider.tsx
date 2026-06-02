@@ -3,13 +3,14 @@
 import { useRef } from 'react';
 import { featuredServices } from '@/data/featuredServices';
 import { Button } from '@/components/ui/Button';
+import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const serviceImages: Record<string, string> = {
   'corte-styling': 'https://images.unsplash.com/photo-1503951914875-452162a0f6f1?q=80&w=800&auto=format&fit=crop',
   'coloracion': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto-format=fit=crop',
-  'tratamientos': 'https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto-format=fit=crop',
-  'peinados': 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=800&auto-format=fit=crop',
+  'tratamientos': 'https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto=format=fit=crop',
+  'peinados': 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=800&auto=format=fit=crop',
 };
 
 export function FeaturedServicesSlider() {
@@ -25,17 +26,12 @@ export function FeaturedServicesSlider() {
   return (
     <section className="section-padding bg-surface-alt flex flex-col items-center justify-center">
       <div className="container-custom w-full">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <p className="text-secondary text-xs font-semibold tracking-widest uppercase mb-3">
-            Lo Mejor para Ti
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text font-display mb-4">
-            Nuestros Servicios
-          </h2>
-          <p className="text-text-secondary text-base md:text-lg">
-            Hacé clic en el servicio que deseas conocer y descubrí cómo transformamos la belleza en arte.
-          </p>
-        </div>
+        <SectionHeading
+          subtitle="Lo Mejor para Ti"
+          title="Nuestros Servicios"
+          description="Hacé clic en el servicio que deseas conocer y descubrí cómo transformamos la belleza en arte."
+          className="max-w-3xl mx-auto mb-12 md:mb-16"
+        />
 
         <div className="relative">
           <button
