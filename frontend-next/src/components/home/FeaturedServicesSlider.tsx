@@ -1,54 +1,25 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import { featuredServices } from '@/data/featuredServices';
-import { getServices } from '@/lib/appsScriptApi';
 import { Button } from '@/components/ui/Button';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Service } from '@/types/service';
 
 const fallbackImages: Record<string, string> = {
   'corte-styling': 'https://images.unsplash.com/photo-1503951914875-452162a0f6f1?q=80&w=800&auto=format&fit=crop',
-  'coloracion': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto-format=fit=crop',
+  'coloracion': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format=fit=crop',
   'tratamientos': 'https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto=format=fit=crop',
   'peinados': 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=800&auto=format=fit=crop',
 };
 
-const categoryToFeatured: Record<string, string> = {
-  'corte': 'corte-styling',
-  'color': 'coloracion',
-  'tratamientos': 'tratamientos',
-  'peinados': 'peinados',
-};
-
-function extractCategoryImage(categoryId: string, services: { id: string; name: string; services: Service[] }[]): string | null {
-  const category = services.find(c => c.id === categoryId);
-  if (!category) return null;
-  for (const service of category.services) {
-    if (service.image) return service.image;
-  }
-  return null;
+interface FeaturedServicesSliderProps {
+  featuredImages?: Record<string, string> | null;
 }
 
-export function FeaturedServicesSlider() {
+export function FeaturedServicesSlider({ featuredImages }: FeaturedServicesSliderProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [images, setImages] = useState<Record<string, string>>(fallbackImages);
-
-  useEffect(() => {
-    getServices()
-      .then((response) => {
-        if (response.status === 'success' && Array.isArray(response.data)) {
-          const newImages: Record<string, string> = { ...fallbackImages };
-          for (const [catId, featId] of Object.entries(categoryToFeatured)) {
-            const img = extractCategoryImage(catId, response.data);
-            if (img) newImages[featId] = img;
-          }
-          setImages(newImages);
-        }
-      })
-      .catch(() => {});
-  }, []);
+  const images = { ...fallbackImages, ...featuredImages };
 
   const scroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
