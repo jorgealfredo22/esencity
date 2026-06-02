@@ -9,7 +9,7 @@ export async function fetchFromAppsScript(endpoint: string, params?: Record<stri
     throw new Error('Apps Script URL no configurada');
   }
 
-  const url = new URL(APPS_SCRIPT_URL);
+  const url = new URL('/api/apps-script', window.location.origin);
   url.searchParams.set('action', endpoint);
 
   if (params) {
@@ -43,7 +43,7 @@ export async function postToAppsScript(endpoint: string, data: Record<string, un
   }
 
   try {
-    const response = await fetch(APPS_SCRIPT_URL, {
+    const response = await fetch('/api/apps-script', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

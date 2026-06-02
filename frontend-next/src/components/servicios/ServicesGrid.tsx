@@ -1,16 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { servicesData } from '@/data/services';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ServiceCard } from './ServiceCard';
 import { cn } from '@/lib/utils';
+import { ServiceCategory } from '@/types/service';
 
-export function ServicesGrid() {
-  const [activeCategory, setActiveCategory] = useState<string>(servicesData[0]?.id || '');
+interface ServicesGridProps {
+  initialServices: ServiceCategory[];
+}
 
-  const activeServices = servicesData.find(cat => cat.id === activeCategory)?.services || [];
+export function ServicesGrid({ initialServices }: ServicesGridProps) {
+  const [activeCategory, setActiveCategory] = useState<string>(initialServices[0]?.id || '');
+
+  const activeServices = initialServices.find(cat => cat.id === activeCategory)?.services || [];
 
   return (
     <section className="section-padding bg-surface">
@@ -21,7 +25,7 @@ export function ServicesGrid() {
         />
 
         <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {servicesData.map((category) => (
+          {initialServices.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
