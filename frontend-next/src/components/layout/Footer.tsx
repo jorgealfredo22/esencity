@@ -10,9 +10,11 @@ export function Footer() {
       <Container size="lg" className="py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <h3 className="text-2xl font-bold font-primary mb-4">
-              {siteConfig.name}
-            </h3>
+            <img
+              src="/brand/imagotipo.svg"
+              alt={siteConfig.name}
+              className="h-10 mb-4 brightness-0 invert"
+            />
             <p className="text-[var(--color-gray-400)] mb-6">
               {siteConfig.description}
             </p>

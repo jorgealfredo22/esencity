@@ -43,6 +43,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  appleWebApp: {
+    title: "ESENCITY",
+  },
 };
 
 export default function RootLayout({
