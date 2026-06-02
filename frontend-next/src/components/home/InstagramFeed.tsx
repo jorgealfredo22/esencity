@@ -7,7 +7,15 @@ import { ErrorState } from '@/components/shared/ErrorState';
 import { InstagramPost } from '@/types/instagram';
 import { getInstagramFeed } from '@/lib/appsScriptApi';
 import { mapInstagramResponse, getInstagramProfileUrl } from '@/lib/instagramMapper';
-import { Camera, Heart, MessageCircle } from 'lucide-react';
+import { Camera } from 'lucide-react';
+
+const InstagramIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+  </svg>
+);
 
 export function InstagramFeed() {
   const [posts, setPosts] = useState<InstagramPost[]>([]);
@@ -20,7 +28,7 @@ export function InstagramFeed() {
       try {
         const data = await getInstagramFeed();
         const mappedPosts = mapInstagramResponse(data);
-        setPosts(mappedPosts.slice(0, 9));
+        setPosts(mappedPosts.slice(0, 8));
       } catch (err) {
         setError('No se pudo cargar el feed de Instagram');
         console.error('Error fetching Instagram feed:', err);
@@ -33,14 +41,17 @@ export function InstagramFeed() {
   }, []);
 
   return (
-    <section className="py-20 md:py-32 bg-[var(--color-primary)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-white)] font-primary mb-4">
+    <section className="section-padding bg-surface-alt">
+      <div className="container-custom">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <p className="text-secondary text-xs font-semibold tracking-widest uppercase mb-3">
+            @{username}
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text font-display mb-4">
             Conoce nuestros Resultados
           </h2>
-          <p className="text-[var(--color-gray-400)] max-w-2xl mx-auto text-lg">
-            Síguenos en Instagram y descubre las últimas tendencias
+          <p className="text-text-secondary text-base md:text-lg">
+            Seguí nuestras últimas transformaciones y descubrí por qué somos la mejor opción para tu look.
           </p>
         </div>
 
@@ -62,8 +73,8 @@ export function InstagramFeed() {
           />
         ) : posts.length === 0 ? (
           <div className="text-center py-12">
-            <Camera className="w-16 h-16 text-[var(--color-gray-600)] mx-auto mb-4" />
-            <p className="text-[var(--color-gray-400)] mb-6">
+            <Camera className="w-12 h-12 text-text-muted mx-auto mb-4" />
+            <p className="text-text-secondary mb-6">
               No hay publicaciones para mostrar
             </p>
             <Button
@@ -76,39 +87,42 @@ export function InstagramFeed() {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {posts.map((post) => (
                 <a
                   key={post.id}
                   href={post.permalink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative aspect-square bg-[var(--color-primary-light)] overflow-hidden group"
+                  className="relative aspect-square rounded-lg overflow-hidden group"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-[var(--color-secondary)]/20 to-[var(--color-primary-light)] flex items-center justify-center">
-                    <Camera className="w-8 h-8 text-[var(--color-gray-600)]" />
-                  </div>
-                  <div className="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/70 transition-colors flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100">
-                    <span className="flex items-center gap-2 text-[var(--color-white)]">
-                      <Heart className="w-5 h-5" />
-                      <span className="text-sm font-medium">0</span>
-                    </span>
-                    <span className="flex items-center gap-2 text-[var(--color-white)]">
-                      <MessageCircle className="w-5 h-5" />
-                      <span className="text-sm font-medium">0</span>
-                    </span>
-                  </div>
+                  <img
+                    src={post.mediaUrl}
+                    alt={post.caption ? post.caption.substring(0, 50) : 'Instagram post'}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-colors flex items-center justify-center">
+                  <InstagramIcon />
+                </div>
                 </a>
               ))}
             </div>
 
-            <div className="text-center mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+              <Button
+                variant="outline"
+                size="lg"
+                href={getInstagramProfileUrl(username)}
+                target="_blank"
+              >
+                Cargar más
+              </Button>
               <Button
                 variant="primary"
                 size="lg"
                 href={getInstagramProfileUrl(username)}
                 target="_blank"
-                icon={<Camera className="w-5 h-5" />}
+                icon={<InstagramIcon />}
               >
                 Seguir en Instagram
               </Button>

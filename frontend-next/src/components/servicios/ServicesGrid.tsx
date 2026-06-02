@@ -12,27 +12,27 @@ export function ServicesGrid() {
   const activeServices = servicesData.find(cat => cat.id === activeCategory)?.services || [];
 
   return (
-    <section className="py-20 md:py-32 bg-[var(--color-white)]">
+    <section className="section-padding bg-surface">
       <Container size="lg">
-        <div className="text-center mb-16">
-          <p className="text-[var(--color-secondary)] text-sm font-semibold tracking-widest uppercase mb-3">
+        <div className="text-center mb-12">
+          <p className="text-secondary text-xs font-semibold tracking-widest uppercase mb-3">
             Explorá
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-primary)] font-primary mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text font-display mb-4">
             Todos nuestros servicios
           </h2>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
           {servicesData.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
               className={cn(
-                'px-6 py-3 rounded-full text-sm font-medium transition-all uppercase tracking-wide',
+                'px-5 py-2 rounded-full text-xs font-medium tracking-wider uppercase transition-colors',
                 activeCategory === category.id
-                  ? 'bg-[var(--color-secondary)] text-[var(--color-white)] shadow-md'
-                  : 'bg-[var(--color-gray-100)] text-[var(--color-gray-600)] hover:bg-[var(--color-gray-200)]'
+                  ? 'bg-secondary text-white'
+                  : 'bg-surface-alt text-text-secondary hover:bg-border'
               )}
             >
               {category.name}
@@ -40,7 +40,7 @@ export function ServicesGrid() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {activeServices.map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}

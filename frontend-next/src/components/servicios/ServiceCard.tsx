@@ -11,32 +11,28 @@ interface ServiceCardProps {
 export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) {
   if (variant === 'compact') {
     return (
-      <div className="bg-[var(--color-gray-50)] rounded-xl p-6 hover:shadow-lg transition-shadow border border-[var(--color-gray-100)]">
-        <h4 className="text-lg font-semibold text-[var(--color-primary)] mb-2">
+      <div className="bg-surface rounded-xl p-5 border border-border">
+        <h4 className="text-base font-semibold text-text mb-1.5">
           {service.name}
         </h4>
-        <p className="text-[var(--color-gray-500)] text-sm mb-3">
+        <p className="text-text-secondary text-sm mb-3">
           {service.description}
         </p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {service.price && (
-              <span className="text-xl font-bold text-[var(--color-secondary)]">
+              <span className="text-lg font-bold text-secondary">
                 {formatPrice(service.price)}
               </span>
             )}
             {service.duration && (
-              <span className="flex items-center gap-1 text-[var(--color-gray-400)] text-xs">
+              <span className="flex items-center gap-1 text-text-muted text-xs">
                 <Clock className="w-3 h-3" />
                 {service.duration}
               </span>
             )}
           </div>
-          <Button
-            variant="ghost"
-            size="sm"
-            href="https://wa.me/541112345678"
-          >
+          <Button variant="ghost" size="sm" href="https://wa.me/541112345678">
             Reservar
           </Button>
         </div>
@@ -45,38 +41,34 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
   }
 
   return (
-    <div className="bg-[var(--color-gray-50)] rounded-xl overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1 border border-[var(--color-gray-100)]">
-      <div className="aspect-[4/3] bg-[var(--color-gray-200)] relative overflow-hidden">
-        <div className="w-full h-full bg-gradient-to-br from-[var(--color-secondary)]/20 to-[var(--color-primary)]/20 flex items-center justify-center">
-          <span className="text-[var(--color-gray-400)]">Imagen de {service.name}</span>
+    <div className="bg-surface-elevated rounded-xl overflow-hidden border border-border hover:shadow-md transition-shadow">
+      <div className="aspect-[4/3] bg-surface-alt relative overflow-hidden">
+        <div className="w-full h-full flex items-center justify-center">
+          <span className="text-text-muted text-sm">Imagen de {service.name}</span>
         </div>
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-[var(--color-primary)] mb-2">
+      <div className="p-5">
+        <h3 className="text-lg font-bold text-text font-display mb-1.5">
           {service.name}
         </h3>
-        <p className="text-[var(--color-gray-500)] mb-4">
+        <p className="text-text-secondary text-sm mb-4">
           {service.description}
         </p>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             {service.price && (
-              <span className="text-lg font-bold text-[var(--color-secondary)]">
+              <span className="text-base font-bold text-secondary">
                 {formatPrice(service.price)}
               </span>
             )}
             {service.duration && (
-              <span className="flex items-center gap-1 text-[var(--color-gray-400)] text-xs">
+              <span className="flex items-center gap-1 text-text-muted text-xs">
                 <Clock className="w-3 h-3" />
                 {service.duration}
               </span>
             )}
           </div>
-          <Button
-            variant="primary"
-            size="sm"
-            href="https://wa.me/541112345678"
-          >
+          <Button variant="primary" size="sm" href="https://wa.me/541112345678">
             Reservar
           </Button>
         </div>

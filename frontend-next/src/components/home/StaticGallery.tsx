@@ -6,13 +6,13 @@ import { GalleryImage } from '@/types/gallery';
 import { Expand } from 'lucide-react';
 
 const placeholderImages: GalleryImage[] = [
-  { id: '1', url: '', alt: 'Transformación 1' },
-  { id: '2', url: '', alt: 'Transformación 2' },
-  { id: '3', url: '', alt: 'Transformación 3' },
-  { id: '4', url: '', alt: 'Transformación 4' },
-  { id: '5', url: '', alt: 'Transformación 5' },
-  { id: '6', url: '', alt: 'Transformación 6' },
-  { id: '7', url: '', alt: 'Transformación 7' },
+  { id: '1', url: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop', alt: 'Transformación 1' },
+  { id: '2', url: 'https://images.unsplash.com/photo-1605497788044-5f8e8e692758?w=600&auto=format&fit=crop', alt: 'Transformación 2' },
+  { id: '3', url: 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&auto=format&fit=crop', alt: 'Transformación 3' },
+  { id: '4', url: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&auto=format&fit=crop', alt: 'Transformación 4' },
+  { id: '5', url: 'https://images.unsplash.com/photo-1527799820374-d8221b2e6246?w=600&auto=format&fit=crop', alt: 'Transformación 5' },
+  { id: '6', url: 'https://images.unsplash.com/photo-1593702288056-7927sdf047a?w=600&auto=format&fit=crop', alt: 'Transformación 6' },
+  { id: '7', url: 'https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&auto=format&fit=crop', alt: 'Transformación 7' },
 ];
 
 export function StaticGallery() {
@@ -38,38 +38,43 @@ export function StaticGallery() {
   }, []);
 
   return (
-    <section id="galeria" ref={sectionRef} className="py-20 md:py-32 bg-[var(--color-white)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-primary)] font-primary mb-4">
+    <section id="galeria" ref={sectionRef} className="section-padding bg-surface">
+      <div className="container-custom">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <p className="text-secondary text-xs font-semibold tracking-widest uppercase mb-3">
+            Resultados Reales
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text font-display mb-4">
             Ellos ya confiaron en Nosotros
           </h2>
-          <p className="text-[var(--color-gray-500)] max-w-2xl mx-auto text-lg">
-            Conoce los resultados de quienes ya vivieron la experiencia Esencity
+          <p className="text-text-secondary text-base md:text-lg">
+            Conocé los resultados de quienes ya vivieron la experiencia Esencity.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {placeholderImages.map((image, index) => (
             <button
               key={image.id}
               onClick={() => setSelectedImage(image)}
-              className={`relative aspect-[3/4] bg-[var(--color-gray-100)] rounded-2xl overflow-hidden group cursor-pointer transition-all duration-500 ${
-                isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              className={`relative aspect-square rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
               style={{ transitionDelay: `${index * 50}ms` }}
             >
-              <div className="w-full h-full bg-gradient-to-br from-[var(--color-secondary)]/10 to-[var(--color-gray-200)] flex items-center justify-center">
-                <span className="text-[var(--color-gray-400)] text-sm">{image.alt}</span>
-              </div>
-              <div className="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/50 transition-colors flex items-center justify-center">
-                <Expand className="w-8 h-8 text-[var(--color-white)] opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img
+                src={image.url}
+                alt={image.alt}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-colors flex items-center justify-center">
+                <Expand className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </button>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-10">
           <Button variant="outline" size="lg" href="/servicios">
             Ver galería completa
           </Button>
@@ -78,14 +83,20 @@ export function StaticGallery() {
 
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-[var(--color-black)]/95 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-primary/95 flex items-center justify-center p-4 animate-fade-in"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="max-w-4xl max-h-[90vh] bg-[var(--color-white)] rounded-2xl overflow-hidden">
-            <div className="w-[80vw] h-[60vh] bg-gradient-to-br from-[var(--color-secondary)]/10 to-[var(--color-gray-200)] flex items-center justify-center">
-              <span className="text-[var(--color-gray-400)] text-xl">{selectedImage.alt}</span>
+          <div className="max-w-4xl w-full bg-surface-elevated rounded-xl overflow-hidden">
+            <div className="aspect-video">
+              <img src={selectedImage.url} alt={selectedImage.alt} className="w-full h-full object-cover" />
             </div>
           </div>
+          <button
+            className="absolute top-4 right-4 w-10 h-10 bg-surface-elevated rounded-full flex items-center justify-center text-text hover:bg-secondary hover:text-white transition-colors"
+            onClick={() => setSelectedImage(null)}
+          >
+            ✕
+          </button>
         </div>
       )}
     </section>

@@ -18,16 +18,16 @@ interface ButtonProps {
 }
 
 const variantStyles = {
-  primary: 'bg-[var(--color-secondary)] text-[var(--color-white)] hover:bg-[var(--color-secondary-dark)]',
-  secondary: 'bg-[var(--color-primary)] text-[var(--color-white)] hover:bg-[var(--color-primary-light)]',
-  outline: 'border-2 border-[var(--color-secondary)] text-[var(--color-secondary)] hover:bg-[var(--color-secondary)] hover:text-[var(--color-white)]',
-  ghost: 'text-[var(--color-secondary)] hover:bg-[var(--color-secondary)]/10',
+  primary: 'bg-secondary text-white hover:bg-secondary-dark',
+  secondary: 'bg-primary text-white hover:bg-primary-light',
+  outline: 'border border-secondary text-secondary hover:bg-secondary hover:text-white',
+  ghost: 'text-secondary hover:bg-secondary-muted',
 };
 
 const sizeStyles = {
-  sm: 'px-6 py-2.5 text-sm',
-  md: 'px-8 py-3 text-base',
-  lg: 'px-10 py-4 text-base',
+  sm: 'px-5 py-2 text-xs font-medium tracking-wider uppercase',
+  md: 'px-6 py-2.5 text-sm font-medium tracking-wider uppercase',
+  lg: 'px-8 py-3.5 text-sm font-medium tracking-wider uppercase',
 };
 
 export function Button({
@@ -43,7 +43,7 @@ export function Button({
   target,
   rel,
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center gap-2 font-medium transition-all duration-300 rounded-full disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex items-center justify-center gap-2 transition-colors duration-200 rounded-full disabled:opacity-50 disabled:cursor-not-allowed';
   const styles = cn(baseStyles, variantStyles[variant], sizeStyles[size], className);
 
   if (href) {

@@ -7,16 +7,16 @@ interface LoaderProps {
 }
 
 const sizeStyles = {
-  sm: 'w-6 h-6 border-2',
-  md: 'w-10 h-10 border-3',
-  lg: 'w-16 h-16 border-4',
+  sm: 'w-5 h-5 border-2',
+  md: 'w-8 h-8 border-2',
+  lg: 'w-12 h-12 border-3',
 };
 
 export function Loader({ size = 'md', fullScreen = false, className }: LoaderProps) {
   const loader = (
     <div
       className={cn(
-        'border-[var(--color-secondary)] border-t-transparent rounded-full animate-spin',
+        'border-secondary border-t-transparent rounded-full animate-spin',
         sizeStyles[size],
         className
       )}
@@ -25,7 +25,7 @@ export function Loader({ size = 'md', fullScreen = false, className }: LoaderPro
 
   if (fullScreen) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-[var(--color-white)]/90 backdrop-blur-sm z-50">
+      <div className="fixed inset-0 flex items-center justify-center bg-surface/90 backdrop-blur-sm z-50">
         {loader}
       </div>
     );

@@ -32,32 +32,32 @@ export function SliderControls({
         <>
           <button
             onClick={onPrev}
-            className="p-2 rounded-full bg-[var(--color-white)]/90 hover:bg-[var(--color-white)] transition-colors shadow-md"
+            className="p-2 rounded-full bg-surface-elevated hover:bg-surface-alt transition-colors shadow-sm"
             aria-label="Previous slide"
           >
-            <ChevronLeft className="w-5 h-5 text-[var(--color-primary)]" />
+            <ChevronLeft className="w-4 h-4 text-text" />
           </button>
           <button
             onClick={onNext}
-            className="p-2 rounded-full bg-[var(--color-white)]/90 hover:bg-[var(--color-white)] transition-colors shadow-md"
+            className="p-2 rounded-full bg-surface-elevated hover:bg-surface-alt transition-colors shadow-sm"
             aria-label="Next slide"
           >
-            <ChevronRight className="w-5 h-5 text-[var(--color-primary)]" />
+            <ChevronRight className="w-4 h-4 text-text" />
           </button>
         </>
       )}
 
       {showDots && (
-        <div className="flex gap-2">
+        <div className="flex gap-1.5">
           {Array.from({ length: totalSlides }).map((_, index) => (
             <button
               key={index}
               onClick={() => onDotClick?.(index)}
               className={cn(
-                'w-2.5 h-2.5 rounded-full transition-all duration-300',
+                'h-1.5 rounded-full transition-all duration-200',
                 index === currentIndex
-                  ? 'bg-[var(--color-secondary)] w-8'
-                  : 'bg-[var(--color-gray-300)] hover:bg-[var(--color-gray-400)]'
+                  ? 'bg-secondary w-6'
+                  : 'bg-border-strong w-1.5 hover:bg-text-muted'
               )}
               aria-label={`Go to slide ${index + 1}`}
             />

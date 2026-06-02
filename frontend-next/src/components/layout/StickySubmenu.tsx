@@ -52,20 +52,20 @@ export function StickySubmenu({ items, className }: StickySubmenuProps) {
 
   return (
     <div className={cn(
-      'fixed top-0 left-0 right-0 z-40 bg-[var(--color-white)]/95 backdrop-blur-md shadow-sm animate-fade-in-down',
+      'fixed top-0 left-0 right-0 z-40 bg-surface-elevated shadow-sm animate-fade-in-down',
       className
     )}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container-custom">
         <nav className="flex items-center gap-6 overflow-x-auto py-3 scrollbar-hide">
           {items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'whitespace-nowrap text-sm font-medium transition-colors pb-1 border-b-2',
+                'whitespace-nowrap text-xs font-medium tracking-wider uppercase transition-colors pb-1 border-b-2',
                 activeItem === item.href.replace('#', '')
-                  ? 'text-[var(--color-secondary)] border-[var(--color-secondary)]'
-                  : 'text-[var(--color-gray-600)] border-transparent hover:text-[var(--color-secondary)]'
+                  ? 'text-secondary border-secondary'
+                  : 'text-text-secondary border-transparent hover:text-secondary'
               )}
             >
               {item.label}
