@@ -169,6 +169,15 @@ function getServices() {
     }
   ];
 
+  var serviceImages = getServiceImages();
+
+  for (var i = 0; i < services.length; i++) {
+    for (var j = 0; j < services[i].services.length; j++) {
+      var serviceId = services[i].services[j].id;
+      services[i].services[j].image = serviceImages[serviceId] || null;
+    }
+  }
+
   return createResponse('success', 'Services fetched successfully', services);
 }
 

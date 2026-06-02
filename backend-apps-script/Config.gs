@@ -7,6 +7,9 @@ var CONFIG = {
   // Google Drive folder ID containing gallery images
   DRIVE_FOLDER_ID: 'YOUR_DRIVE_FOLDER_ID',
 
+  // Google Drive folder ID containing service images (filename = service ID)
+  SERVICE_IMAGES_FOLDER_ID: 'YOUR_SERVICE_IMAGES_FOLDER_ID',
+
   // Instagram API configuration
   INSTAGRAM_ACCESS_TOKEN: 'YOUR_INSTAGRAM_ACCESS_TOKEN',
   INSTAGRAM_ACCOUNT_ID: 'YOUR_INSTAGRAM_ACCOUNT_ID',
