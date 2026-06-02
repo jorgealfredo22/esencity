@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 interface SectionHeadingProps {
   title: string;
   subtitle?: string;
-  description?: string;
+  description?: ReactNode;
   align?: 'left' | 'center' | 'right';
   light?: boolean;
   className?: string;

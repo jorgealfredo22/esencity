@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { BrandLogo } from '@/components/shared/BrandLogo';
 import { siteConfig } from '@/data/site';
 
 export function Hero() {
@@ -21,16 +22,15 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/50 to-primary" />
 
-      <div className="container-custom relative z-10 text-center px-4 py-20">
+      <div className="container-custom relative z-10 flex flex-col items-center justify-center text-center px-4">
         <div
           className={`transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <img
-            src="/brand/imagotipo.svg"
-            alt={siteConfig.name}
-            className="h-20 md:h-28 lg:h-36 mx-auto mb-6 md:mb-8"
+          <BrandLogo
+            className="w-auto mx-auto mb-6 md:mb-8"
+            style={{ height: 'clamp(220px, 18vw, 420px)' }}
           />
         </div>
 
@@ -43,7 +43,7 @@ export function Hero() {
         </h1>
 
         <p
-          className={`text-lg md:text-xl text-text-inverse/80 max-w-2xl mx-auto mb-10 font-light leading-relaxed transition-all duration-700 delay-300 ${
+          className={`text-lg md:text-xl text-text-inverse opacity-80 max-w-2xl mx-auto mb-10 font-light leading-relaxed transition-all duration-700 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
