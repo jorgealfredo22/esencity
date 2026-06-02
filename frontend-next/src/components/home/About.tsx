@@ -39,7 +39,7 @@ export function About() {
   }, []);
 
   return (
-    <section id="nosotros" ref={sectionRef} className="section-padding bg-surface">
+    <section id="nosotros" ref={sectionRef} className="section-padding bg-surface flex flex-col items-center justify-center">
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <p className="text-secondary text-xs font-semibold tracking-widest uppercase mb-3">
