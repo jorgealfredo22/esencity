@@ -48,7 +48,7 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
           <img
             src={service.image}
             alt={service.name}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover max-w-none"
             loading="lazy"
           />
         ) : (
