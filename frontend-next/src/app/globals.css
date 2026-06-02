@@ -99,7 +99,6 @@ img, svg, video, canvas, audio, iframe, embed, object {
 
 img, video {
   max-width: 100%;
-  height: auto;
 }
 
 input,
