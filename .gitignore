@@ -1,9 +1,37 @@
+# Dependencies
 node_modules/
+
+# Next.js
 .next/
 out/
 dist/
-*.log
+*.tsbuildinfo
+
+# Environment variables
+.env
 .env.local
 .env*.local
+.env.production
+.env.development
+
+# OS
 .DS_Store
-*.tsbuildinfo
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build
+build/
+
+# Testing
+coverage/
