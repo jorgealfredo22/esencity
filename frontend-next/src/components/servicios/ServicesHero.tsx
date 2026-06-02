@@ -8,13 +8,6 @@ export function ServicesHero() {
   return (
     <section className="relative py-32 md:py-40 bg-[var(--color-primary)] overflow-hidden">
       <div className="absolute inset-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: 'url(/services-hero.jpg)',
-            opacity: 0.3,
-          }}
-        />
         <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-primary)]/70 to-[var(--color-primary)]/90" />
       </div>
 
@@ -28,11 +21,14 @@ export function ServicesHero() {
           >
             Volver al inicio
           </Button>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-white)] font-primary mb-6">
+          <p className="text-[var(--color-secondary)] text-sm font-semibold tracking-widest uppercase mb-3">
             Nuestros Servicios
+          </p>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-white)] font-primary mb-6">
+            Descubre el arte de tu belleza
           </h1>
-          <p className="text-lg md:text-xl text-[var(--color-gray-300)] max-w-2xl mx-auto">
-            Descubrí nuestra amplia gama de servicios profesionales diseñados para realzar tu belleza y bienestar.
+          <p className="text-lg md:text-xl text-[var(--color-gray-400)] max-w-2xl mx-auto">
+            Agenda tu cita y descubre por qué la belleza, en manos expertas, se convierte en arte.
           </p>
         </div>
       </Container>

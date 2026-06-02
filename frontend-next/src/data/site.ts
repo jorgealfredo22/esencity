@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: 'Esencity Peluquería',
-  description: 'Tu destino de belleza y estilo. Expertos en color, corte y tratamientos capilares.',
+  name: 'ESENCITY',
+  description: 'La belleza, en manos expertas, se convierte en arte.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://esencity.com',
   email: 'info@esencity.com',
   phone: '+54 11 1234-5678',

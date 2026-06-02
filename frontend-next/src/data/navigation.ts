@@ -5,21 +5,20 @@ export interface NavItem {
 
 export const mainNavigation: NavItem[] = [
   { label: 'Inicio', href: '/' },
-  { label: 'Nosotros', href: '/#nosotros' },
+  { label: 'Esencity', href: '/#nosotros' },
   { label: 'Servicios', href: '/servicios' },
-  { label: 'Galería', href: '/#galeria' },
   { label: 'Contacto', href: '/#contacto' },
 ];
 
 export const footerNavigation = {
   services: [
-    { label: 'Corte & Styling', href: '/servicios#corte' },
-    { label: 'Coloración', href: '/servicios#color' },
-    { label: 'Tratamientos', href: '/servicios#tratamientos' },
-    { label: 'Peinados', href: '/servicios#peinados' },
+    { label: 'Barbería', href: '/servicios#barberia' },
+    { label: 'Spa Capilar', href: '/servicios#spa-capilar' },
+    { label: 'Color', href: '/servicios#color' },
+    { label: 'Make Up', href: '/servicios#makeup' },
   ],
   company: [
-    { label: 'Nosotros', href: '/#nosotros' },
+    { label: 'Esencity', href: '/#nosotros' },
     { label: 'Galería', href: '/#galeria' },
     { label: 'Contacto', href: '/#contacto' },
   ],

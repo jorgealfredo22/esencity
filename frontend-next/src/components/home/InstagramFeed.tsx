@@ -2,13 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { Loader } from '@/components/shared/Loader';
 import { ErrorState } from '@/components/shared/ErrorState';
 import { InstagramPost } from '@/types/instagram';
 import { getInstagramFeed } from '@/lib/appsScriptApi';
-import { mapInstagramResponse, formatInstagramDate, getInstagramProfileUrl } from '@/lib/instagramMapper';
+import { mapInstagramResponse, getInstagramProfileUrl } from '@/lib/instagramMapper';
 import { Camera, Heart, MessageCircle } from 'lucide-react';
 
 export function InstagramFeed() {
@@ -22,7 +21,7 @@ export function InstagramFeed() {
       try {
         const data = await getInstagramFeed();
         const mappedPosts = mapInstagramResponse(data);
-        setPosts(mappedPosts.slice(0, 6));
+        setPosts(mappedPosts.slice(0, 9));
       } catch (err) {
         setError('No se pudo cargar el feed de Instagram');
         console.error('Error fetching Instagram feed:', err);
@@ -37,11 +36,14 @@ export function InstagramFeed() {
   return (
     <section className="py-20 md:py-32 bg-[var(--color-white)]">
       <Container size="lg">
-        <SectionHeading
-          subtitle="Seguinos en Instagram"
-          title={`@${username}`}
-          description="Mirá nuestras últimas publicaciones y mantenete al día con las tendencias."
-        />
+        <div className="text-center mb-16">
+          <p className="text-[var(--color-secondary)] text-sm font-semibold tracking-widest uppercase mb-3">
+            Instagram
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-primary)] font-primary mb-6">
+            Síguenos en Instagram
+          </h2>
+        </div>
 
         {loading ? (
           <Loader size="lg" />
@@ -75,7 +77,7 @@ export function InstagramFeed() {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {posts.map((post) => (
                 <a
                   key={post.id}
@@ -85,14 +87,14 @@ export function InstagramFeed() {
                   className="relative aspect-square bg-[var(--color-gray-100)] rounded-xl overflow-hidden group"
                 >
                   <div className="w-full h-full bg-gradient-to-br from-[var(--color-secondary)]/20 to-[var(--color-primary)]/20" />
-                  <div className="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/50 transition-colors flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100">
-                    <span className="flex items-center gap-1 text-[var(--color-white)]">
-                      <Heart className="w-4 h-4" />
-                      <span className="text-sm">0</span>
+                  <div className="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/60 transition-colors flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100">
+                    <span className="flex items-center gap-2 text-[var(--color-white)]">
+                      <Heart className="w-5 h-5" />
+                      <span className="text-sm font-medium">0</span>
                     </span>
-                    <span className="flex items-center gap-1 text-[var(--color-white)]">
-                      <MessageCircle className="w-4 h-4" />
-                      <span className="text-sm">0</span>
+                    <span className="flex items-center gap-2 text-[var(--color-white)]">
+                      <MessageCircle className="w-5 h-5" />
+                      <span className="text-sm font-medium">0</span>
                     </span>
                   </div>
                 </a>

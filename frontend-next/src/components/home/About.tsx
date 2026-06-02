@@ -2,14 +2,60 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { Scissors, Heart, Award, Users } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
+import { Scissors, Sparkles, Heart, Hand, Crown, Palette, Star, Users, Eye, ScissorsLineDashed } from 'lucide-react';
 
-const stats = [
-  { icon: Scissors, value: '15+', label: 'Años de experiencia' },
-  { icon: Heart, value: '10K+', label: 'Clientes felices' },
-  { icon: Award, value: '50+', label: 'Premios ganados' },
-  { icon: Users, value: '20+', label: 'Estilistas expertos' },
+const experiences = [
+  {
+    icon: Scissors,
+    title: 'Barbería',
+    description: 'Estilo que marca diferencia',
+  },
+  {
+    icon: Sparkles,
+    title: 'Spa Capilar',
+    description: 'Renueva, repara y brilla',
+  },
+  {
+    icon: Heart,
+    title: 'Spa Corporal',
+    description: 'Relaja cuerpo, mente y alma',
+  },
+  {
+    icon: Hand,
+    title: 'Spa Manos y Pies',
+    description: 'Elegancia celestial',
+  },
+  {
+    icon: Crown,
+    title: 'Ocasiones Especiales',
+    description: 'Tu momento para brillar',
+  },
+  {
+    icon: Palette,
+    title: 'Color',
+    description: 'Vive el poder de los tonos perfectos',
+  },
+  {
+    icon: Star,
+    title: 'Make Up',
+    description: 'Belleza que se siente y se ve',
+  },
+  {
+    icon: Users,
+    title: 'Hair Style Kids',
+    description: 'Diversión y estilo para los peques',
+  },
+  {
+    icon: Eye,
+    title: 'Cejas y Pestañas',
+    description: 'Donde la expresión cobra vida',
+  },
+  {
+    icon: ScissorsLineDashed,
+    title: 'Cortes y Peinados',
+    description: 'Elegancia en cada movimiento',
+  },
 ];
 
 export function About() {
@@ -23,7 +69,7 @@ export function About() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -34,56 +80,46 @@ export function About() {
   }, []);
 
   return (
-    <section id="nosotros" ref={sectionRef} className="py-20 md:py-32 bg-[var(--color-gray-50)]">
+    <section id="nosotros" ref={sectionRef} className="py-20 md:py-32 bg-[var(--color-primary)]">
       <Container size="lg">
-        <SectionHeading
-          subtitle="Sobre Nosotros"
-          title="Tu belleza, nuestra pasión"
-          description="Somos un equipo de profesionales dedicados a realzar tu belleza natural con las últimas tendencias y técnicas del mundo de la peluquería."
-        />
+        <div className="text-center mb-16">
+          <p className={`text-[var(--color-gray-300)] text-lg mb-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            Más de 20 años perfeccionando el arte del color, el corte y la transformación capilar.
+          </p>
+          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-white)] font-primary mb-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            ¿Qué experiencia quieres vivir hoy?
+          </h2>
+          <p className={`text-[var(--color-gray-400)] max-w-2xl mx-auto transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            En <strong className="text-[var(--color-white)]">Esencity</strong>, cada servicio es un ritual de belleza diseñado para resaltar tu esencia con técnica, elegancia y precisión.
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-          <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
-            <div className="relative">
-              <div className="aspect-[4/5] bg-[var(--color-gray-200)] rounded-2xl overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-[var(--color-secondary)]/20 to-[var(--color-primary)]/20 flex items-center justify-center">
-                  <span className="text-[var(--color-gray-400)] text-lg">Imagen del salón</span>
-                </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+          {experiences.map((exp, index) => (
+            <div
+              key={exp.title}
+              className={`flex flex-col items-center text-center p-6 rounded-xl hover:bg-[var(--color-primary-light)] transition-all duration-500 group cursor-pointer ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${index * 50 + 400}ms` }}
+            >
+              <div className="p-4 bg-[var(--color-secondary)]/10 rounded-full mb-4 group-hover:bg-[var(--color-secondary)]/20 transition-colors">
+                <exp.icon className="w-8 h-8 text-[var(--color-secondary)]" />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[var(--color-secondary)] rounded-2xl -z-10" />
+              <h3 className="text-[var(--color-white)] font-semibold mb-2 text-sm md:text-base">
+                {exp.title}
+              </h3>
+              <p className="text-[var(--color-gray-400)] text-xs md:text-sm">
+                {exp.description}
+              </p>
             </div>
-          </div>
+          ))}
+        </div>
 
-          <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
-            <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-primary)] mb-6">
-              Más que una peluquería, una experiencia
-            </h3>
-            <p className="text-[var(--color-gray-600)] mb-6 leading-relaxed">
-              En Esencity creemos que cada persona merece sentirse especial. Nuestro salón está diseñado para brindarte una experiencia única, donde el lujo y la comodidad se combinan con la excelencia profesional.
-            </p>
-            <p className="text-[var(--color-gray-600)] mb-8 leading-relaxed">
-              Utilizamos productos de primera calidad y nos mantenemos actualizados con las últimas tendencias internacionales para ofrecerte resultados que superen tus expectativas.
-            </p>
-            <div className="grid grid-cols-2 gap-6">
-              {stats.map((stat, index) => (
-                <div
-                  key={stat.label}
-                  className={`flex items-center gap-4 transition-all duration-500 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                  }`}
-                  style={{ transitionDelay: `${index * 100 + 400}ms` }}
-                >
-                  <div className="p-3 bg-[var(--color-secondary)]/10 rounded-xl">
-                    <stat.icon className="w-6 h-6 text-[var(--color-secondary)]" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-[var(--color-primary)]">{stat.value}</div>
-                    <div className="text-sm text-[var(--color-gray-500)]">{stat.label}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className={`text-center mt-12 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <Button variant="outline" size="lg" href="/servicios">
+            Ver servicios
+          </Button>
         </div>
       </Container>
     </section>

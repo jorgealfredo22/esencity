@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { Container } from '@/components/ui/Container';
-import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { siteConfig } from '@/data/site';
 import { submitContactForm } from '@/lib/appsScriptApi';
@@ -53,28 +52,30 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="py-20 md:py-32 bg-[var(--color-gray-50)]">
+    <section id="contacto" className="py-20 md:py-32 bg-[var(--color-primary)]">
       <Container size="lg">
-        <SectionHeading
-          subtitle="Contacto"
-          title="Hablemos"
-          description="¿Tenés alguna consulta o querés reservar un turno? Estamos acá para ayudarte."
-        />
+        <div className="text-center mb-16">
+          <p className="text-[var(--color-secondary)] text-sm font-semibold tracking-widest uppercase mb-3">
+            Contacto
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-white)] font-primary mb-6">
+            Agenda tu cita
+          </h2>
+          <p className="text-[var(--color-gray-400)] max-w-2xl mx-auto">
+            Descubre por qué la belleza, en manos expertas, se convierte en arte.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-2xl font-bold text-[var(--color-primary)] mb-6">
-              Información de contacto
-            </h3>
-
-            <div className="space-y-6 mb-8">
+            <div className="space-y-8 mb-8">
               <div className="flex items-start gap-4">
                 <div className="p-3 bg-[var(--color-secondary)]/10 rounded-xl">
                   <MapPin className="w-6 h-6 text-[var(--color-secondary)]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-[var(--color-primary)] mb-1">Dirección</h4>
-                  <p className="text-[var(--color-gray-600)]">
+                  <h4 className="font-semibold text-[var(--color-white)] mb-1">Ubicación</h4>
+                  <p className="text-[var(--color-gray-400)]">
                     {siteConfig.address.street}<br />
                     {siteConfig.address.city}, {siteConfig.address.country}
                   </p>
@@ -86,7 +87,7 @@ export function ContactSection() {
                   <Phone className="w-6 h-6 text-[var(--color-secondary)]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-[var(--color-primary)] mb-1">Teléfono</h4>
+                  <h4 className="font-semibold text-[var(--color-white)] mb-1">Teléfono</h4>
                   <a href={`tel:${siteConfig.phone}`} className="text-[var(--color-secondary)] hover:underline">
                     {siteConfig.phone}
                   </a>
@@ -98,7 +99,7 @@ export function ContactSection() {
                   <Mail className="w-6 h-6 text-[var(--color-secondary)]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-[var(--color-primary)] mb-1">Email</h4>
+                  <h4 className="font-semibold text-[var(--color-white)] mb-1">Email</h4>
                   <a href={`mailto:${siteConfig.email}`} className="text-[var(--color-secondary)] hover:underline">
                     {siteConfig.email}
                   </a>
@@ -110,11 +111,10 @@ export function ContactSection() {
                   <Clock className="w-6 h-6 text-[var(--color-secondary)]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-[var(--color-primary)] mb-1">Horarios</h4>
-                  <div className="text-[var(--color-gray-600)]">
-                    <div>Lun - Vie: {siteConfig.hours.monday}</div>
-                    <div>Sáb: {siteConfig.hours.saturday}</div>
-                    <div>Dom: {siteConfig.hours.sunday}</div>
+                  <h4 className="font-semibold text-[var(--color-white)] mb-1">Horarios</h4>
+                  <div className="text-[var(--color-gray-400)] space-y-1">
+                    <div>Lunes a Sábado: {siteConfig.hours.monday}</div>
+                    <div>Domingos: {siteConfig.hours.sunday}</div>
                   </div>
                 </div>
               </div>
@@ -124,7 +124,7 @@ export function ContactSection() {
               variant="primary"
               size="lg"
               href={siteConfig.social.whatsapp}
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto uppercase tracking-wider"
             >
               Reservar por WhatsApp
             </Button>
@@ -132,12 +132,12 @@ export function ContactSection() {
 
           <div>
             {isSubmitted ? (
-              <div className="bg-[var(--color-white)] rounded-2xl p-8 shadow-lg text-center">
-                <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-[var(--color-primary)] mb-2">
+              <div className="bg-[var(--color-primary-light)] rounded-2xl p-8 text-center">
+                <CheckCircle className="w-16 h-16 text-[var(--color-secondary)] mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-[var(--color-white)] mb-2">
                   ¡Mensaje enviado!
                 </h3>
-                <p className="text-[var(--color-gray-600)] mb-6">
+                <p className="text-[var(--color-gray-400)] mb-6">
                   Gracias por contactarnos. Te responderemos a la brevedad.
                 </p>
                 <Button
@@ -148,20 +148,20 @@ export function ContactSection() {
                 </Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-[var(--color-white)] rounded-2xl p-8 shadow-lg">
-                <h3 className="text-2xl font-bold text-[var(--color-primary)] mb-6">
+              <form onSubmit={handleSubmit} className="bg-[var(--color-primary-light)] rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-[var(--color-white)] mb-6">
                   Envianos un mensaje
                 </h3>
 
                 {error && (
-                  <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-lg">
+                  <div className="mb-6 p-4 bg-red-900/30 text-red-400 rounded-lg">
                     {error}
                   </div>
                 )}
 
                 <div className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-[var(--color-gray-700)] mb-1">
+                    <label htmlFor="name" className="block text-sm font-medium text-[var(--color-gray-300)] mb-1">
                       Nombre *
                     </label>
                     <input
@@ -170,13 +170,13 @@ export function ContactSection() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-[var(--color-gray-200)] rounded-lg focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-transparent outline-none transition-all"
+                      className="w-full px-4 py-3 bg-[var(--color-primary)] border border-[var(--color-gray-700)] rounded-lg text-[var(--color-white)] focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-transparent outline-none transition-all"
                       required
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-[var(--color-gray-700)] mb-1">
+                    <label htmlFor="email" className="block text-sm font-medium text-[var(--color-gray-300)] mb-1">
                       Email *
                     </label>
                     <input
@@ -185,13 +185,13 @@ export function ContactSection() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-[var(--color-gray-200)] rounded-lg focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-transparent outline-none transition-all"
+                      className="w-full px-4 py-3 bg-[var(--color-primary)] border border-[var(--color-gray-700)] rounded-lg text-[var(--color-white)] focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-transparent outline-none transition-all"
                       required
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-[var(--color-gray-700)] mb-1">
+                    <label htmlFor="phone" className="block text-sm font-medium text-[var(--color-gray-300)] mb-1">
                       Teléfono
                     </label>
                     <input
@@ -200,12 +200,12 @@ export function ContactSection() {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-[var(--color-gray-200)] rounded-lg focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-transparent outline-none transition-all"
+                      className="w-full px-4 py-3 bg-[var(--color-primary)] border border-[var(--color-gray-700)] rounded-lg text-[var(--color-white)] focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-transparent outline-none transition-all"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-[var(--color-gray-700)] mb-1">
+                    <label htmlFor="message" className="block text-sm font-medium text-[var(--color-gray-300)] mb-1">
                       Mensaje *
                     </label>
                     <textarea
@@ -214,7 +214,7 @@ export function ContactSection() {
                       value={formData.message}
                       onChange={handleChange}
                       rows={4}
-                      className="w-full px-4 py-3 border border-[var(--color-gray-200)] rounded-lg focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-transparent outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 bg-[var(--color-primary)] border border-[var(--color-gray-700)] rounded-lg text-[var(--color-white)] focus:ring-2 focus:ring-[var(--color-secondary)] focus:border-transparent outline-none transition-all resize-none"
                       required
                     />
                   </div>
@@ -223,7 +223,7 @@ export function ContactSection() {
                     type="submit"
                     variant="primary"
                     size="lg"
-                    className="w-full"
+                    className="w-full uppercase tracking-wider"
                     disabled={isSubmitting}
                     icon={isSubmitting ? undefined : <Send className="w-4 h-4" />}
                   >

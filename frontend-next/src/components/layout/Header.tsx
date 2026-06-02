@@ -24,7 +24,7 @@ export function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[var(--color-white)]/95 backdrop-blur-md shadow-md py-3'
+          ? 'bg-[var(--color-primary)]/95 backdrop-blur-md shadow-lg py-3'
           : 'bg-transparent py-5'
       }`}
     >
@@ -45,8 +45,8 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-[var(--color-secondary)] ${
-                  isScrolled ? 'text-[var(--color-gray-700)]' : 'text-[var(--color-white)]/90'
+                className={`text-sm font-medium tracking-wide uppercase transition-colors hover:text-[var(--color-secondary)] ${
+                  isScrolled ? 'text-[var(--color-white)]/80' : 'text-[var(--color-white)]/90'
                 }`}
               >
                 {item.label}
@@ -57,13 +57,13 @@ export function Header() {
               size="sm"
               href={siteConfig.social.whatsapp}
             >
-              Reservar Turno
+              Agenda tu cita
             </Button>
           </nav>
 
           <button
             className={`md:hidden p-2 transition-colors ${
-              isScrolled ? 'text-[var(--color-primary)]' : 'text-[var(--color-white)]'
+              isScrolled ? 'text-[var(--color-white)]' : 'text-[var(--color-white)]'
             }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
@@ -74,13 +74,13 @@ export function Header() {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[var(--color-white)] border-t border-[var(--color-gray-100)] animate-fade-in-down">
+        <div className="md:hidden bg-[var(--color-primary)] border-t border-[var(--color-gray-800)] animate-fade-in-down">
           <nav className="flex flex-col py-4">
             {mainNavigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="px-6 py-3 text-[var(--color-gray-700)] hover:bg-[var(--color-gray-50)] hover:text-[var(--color-secondary)] transition-colors"
+                className="px-6 py-3 text-[var(--color-white)]/80 hover:bg-[var(--color-primary-light)] hover:text-[var(--color-secondary)] transition-colors uppercase tracking-wide text-sm"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}
@@ -93,7 +93,7 @@ export function Header() {
                 href={siteConfig.social.whatsapp}
                 className="w-full"
               >
-                Reservar Turno
+                Agenda tu cita
               </Button>
             </div>
           </nav>
