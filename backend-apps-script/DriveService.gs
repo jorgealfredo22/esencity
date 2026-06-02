@@ -53,7 +53,7 @@ function getServiceImages() {
       if (mimeType.indexOf('image') !== -1) {
         var name = file.getName();
         var serviceId = name.replace(/\.[^.]+$/, '');
-        imageMap[serviceId] = 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w800';
+        imageMap[serviceId] = 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1200';
       }
     }
 

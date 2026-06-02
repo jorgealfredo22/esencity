@@ -25,9 +25,9 @@ export default async function Home() {
         for (const s of category.services) {
           if (s.image) {
             categoryImages[featId] = s.image.replace(
-              /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w(\d+)/,
-              "/api/apps-script/image?id=$1&sz=w$2"
-            );
+                /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w\d+/,
+                "/api/apps-script/image?id=$1&sz=w1200"
+              );
             break;
           }
         }
