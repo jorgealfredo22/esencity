@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ServiceCard } from './ServiceCard';
@@ -12,7 +12,24 @@ interface ServicesGridProps {
 }
 
 export function ServicesGrid({ initialServices }: ServicesGridProps) {
-  const [activeCategory, setActiveCategory] = useState<string>(initialServices[0]?.id || '');
+  const [activeCategory, setActiveCategory] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.replace('#', '');
+      if (initialServices.some(cat => cat.id === hash)) return hash;
+    }
+    return initialServices[0]?.id || '';
+  });
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (initialServices.some(cat => cat.id === hash)) {
+        setActiveCategory(hash);
+      }
+    };
+    window.addEventListener('hashchange', onHashChange);
+    return () => window.removeEventListener('hashchange', onHashChange);
+  }, [initialServices]);
 
   const activeServices = initialServices.find(cat => cat.id === activeCategory)?.services || [];
 
