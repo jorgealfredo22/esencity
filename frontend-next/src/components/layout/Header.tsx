@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { mainNavigation } from '@/data/navigation';
 import { siteConfig } from '@/data/site';
@@ -8,35 +8,17 @@ import { Button } from '@/components/ui/Button';
 import { Menu, X } from 'lucide-react';
 
 export function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[var(--color-primary)]/95 backdrop-blur-md shadow-lg py-3'
-          : 'bg-transparent py-5'
-      }`}
-    >
+    <header className="absolute top-0 left-0 right-0 z-50 py-5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <img
               src="/brand/imagotipo.svg"
               alt={siteConfig.name}
-              className={`h-8 md:h-10 transition-all ${
-                isScrolled ? 'opacity-100' : 'opacity-90'
-              }`}
+              className="h-8 md:h-10 brightness-0 invert"
             />
           </Link>
 
@@ -45,9 +27,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium tracking-wide uppercase transition-colors hover:text-[var(--color-secondary)] ${
-                  isScrolled ? 'text-[var(--color-white)]/80' : 'text-[var(--color-white)]/90'
-                }`}
+                className="text-sm font-medium tracking-wide uppercase transition-colors text-[var(--color-white)]/90 hover:text-[var(--color-secondary)]"
               >
                 {item.label}
               </Link>
@@ -62,9 +42,7 @@ export function Header() {
           </nav>
 
           <button
-            className={`md:hidden p-2 transition-colors ${
-              isScrolled ? 'text-[var(--color-white)]' : 'text-[var(--color-white)]'
-            }`}
+            className="md:hidden p-2 text-[var(--color-white)]"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -74,7 +52,7 @@ export function Header() {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[var(--color-primary)] border-t border-[var(--color-gray-800)] animate-fade-in-down">
+        <div className="md:hidden bg-[var(--color-primary)]/95 backdrop-blur-md border-t border-[var(--color-gray-800)]">
           <nav className="flex flex-col py-4">
             {mainNavigation.map((item) => (
               <Link

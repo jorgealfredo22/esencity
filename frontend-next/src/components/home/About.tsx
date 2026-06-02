@@ -1,61 +1,20 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
-import { Scissors, Sparkles, Heart, Hand, Crown, Palette, Star, Users, Eye, ScissorsLineDashed } from 'lucide-react';
+import { Scissors, Sparkles, Heart, Hand, Crown, Palette, Star, Users, Eye, ScissorsLineDashed, ChevronRight } from 'lucide-react';
 
 const experiences = [
-  {
-    icon: Scissors,
-    title: 'Barbería',
-    description: 'Estilo que marca diferencia',
-  },
-  {
-    icon: Sparkles,
-    title: 'Spa Capilar',
-    description: 'Renueva, repara y brilla',
-  },
-  {
-    icon: Heart,
-    title: 'Spa Corporal',
-    description: 'Relaja cuerpo, mente y alma',
-  },
-  {
-    icon: Hand,
-    title: 'Spa Manos y Pies',
-    description: 'Elegancia celestial',
-  },
-  {
-    icon: Crown,
-    title: 'Ocasiones Especiales',
-    description: 'Tu momento para brillar',
-  },
-  {
-    icon: Palette,
-    title: 'Color',
-    description: 'Vive el poder de los tonos perfectos',
-  },
-  {
-    icon: Star,
-    title: 'Make Up',
-    description: 'Belleza que se siente y se ve',
-  },
-  {
-    icon: Users,
-    title: 'Hair Style Kids',
-    description: 'Diversión y estilo para los peques',
-  },
-  {
-    icon: Eye,
-    title: 'Cejas y Pestañas',
-    description: 'Donde la expresión cobra vida',
-  },
-  {
-    icon: ScissorsLineDashed,
-    title: 'Cortes y Peinados',
-    description: 'Elegancia en cada movimiento',
-  },
+  { icon: Scissors, title: 'Barbería — Estilo que marca diferencia' },
+  { icon: Sparkles, title: 'Spa Capilar — Renueva, repara y brilla' },
+  { icon: Heart, title: 'Spa Corporal — Relaja cuerpo, mente y alma' },
+  { icon: Hand, title: 'Spa Manos y pies con elegancia celestial' },
+  { icon: Crown, title: 'Ocasiones Especiales — Tu momento para brillar' },
+  { icon: Palette, title: 'Color — Vive el poder de los tonos perfectos' },
+  { icon: Star, title: 'Make Up — Belleza que se siente y se ve' },
+  { icon: Users, title: 'Hair Style Kids' },
+  { icon: Eye, title: 'Cejas y Pestañas — Donde la expresión cobra vida' },
+  { icon: ScissorsLineDashed, title: 'Cortes y Peinados — Elegancia en cada movimiento' },
 ];
 
 export function About() {
@@ -81,47 +40,70 @@ export function About() {
 
   return (
     <section id="nosotros" ref={sectionRef} className="py-20 md:py-32 bg-[var(--color-primary)]">
-      <Container size="lg">
-        <div className="text-center mb-16">
-          <p className={`text-[var(--color-gray-300)] text-lg mb-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            Más de 20 años perfeccionando el arte del color, el corte y la transformación capilar.
-          </p>
-          <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-white)] font-primary mb-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            ¿Qué experiencia quieres vivir hoy?
-          </h2>
-          <p className={`text-[var(--color-gray-400)] max-w-2xl mx-auto transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            En <strong className="text-[var(--color-white)]">Esencity</strong>, cada servicio es un ritual de belleza diseñado para resaltar tu esencia con técnica, elegancia y precisión.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
-          {experiences.map((exp, index) => (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+          <div className="lg:col-span-3">
             <div
-              key={exp.title}
-              className={`flex flex-col items-center text-center p-6 rounded-xl hover:bg-[var(--color-primary-light)] transition-all duration-500 group cursor-pointer ${
+              className={`transition-all duration-700 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
-              style={{ transitionDelay: `${index * 50 + 400}ms` }}
             >
-              <div className="p-4 bg-[var(--color-secondary)]/10 rounded-full mb-4 group-hover:bg-[var(--color-secondary)]/20 transition-colors">
-                <exp.icon className="w-8 h-8 text-[var(--color-secondary)]" />
-              </div>
-              <h3 className="text-[var(--color-white)] font-semibold mb-2 text-sm md:text-base">
-                {exp.title}
-              </h3>
-              <p className="text-[var(--color-gray-400)] text-xs md:text-sm">
-                {exp.description}
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-white)] font-primary mb-6">
+                ¿Qué experiencia quieres vivir hoy?
+              </h2>
+              <p className="text-[var(--color-gray-300)] text-lg mb-2">
+                Más de 20 años perfeccionando el arte del color, el corte y la transformación capilar.
+              </p>
+              <p className="text-[var(--color-gray-300)]/80 mb-10">
+                En <strong className="text-[var(--color-white)]">Esencity</strong>, cada servicio es un ritual de belleza diseñado para resaltar tu esencia con técnica, elegancia y precisión.
               </p>
             </div>
-          ))}
-        </div>
 
-        <div className={`text-center mt-12 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <Button variant="outline" size="lg" href="/servicios">
-            Ver servicios
-          </Button>
+            <div className="space-y-1">
+              {experiences.map((exp, index) => (
+                <div
+                  key={exp.title}
+                  className={`flex items-center gap-4 py-3 px-2 border-b border-[var(--color-gray-800)]/50 hover:border-[var(--color-secondary)]/30 transition-all duration-500 group cursor-pointer ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}
+                  style={{ transitionDelay: `${index * 50 + 200}ms` }}
+                >
+                  <div className="p-2.5 rounded-full bg-[var(--color-secondary)]/10 group-hover:bg-[var(--color-secondary)]/20 transition-colors flex-shrink-0">
+                    <exp.icon className="w-5 h-5 text-[var(--color-secondary)]" />
+                  </div>
+                  <h4 className="text-[var(--color-white)]/80 text-sm md:text-base group-hover:text-[var(--color-white)] transition-colors">
+                    {exp.title}
+                  </h4>
+                  <ChevronRight className="w-4 h-4 text-[var(--color-gray-600)] ml-auto opacity-0 group-hover:opacity-100 transition-all" />
+                </div>
+              ))}
+            </div>
+
+            <div className={`mt-10 transition-all duration-700 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+              <Button variant="primary" size="lg" href="/servicios">
+                Ver servicios
+              </Button>
+            </div>
+          </div>
+
+          <div
+            className={`lg:col-span-2 transition-all duration-1000 delay-500 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+            }`}
+          >
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-[var(--color-gray-800)]">
+              <div className="w-full h-full bg-gradient-to-br from-[var(--color-secondary)]/20 to-[var(--color-primary-light)] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-[var(--color-secondary)]/20 flex items-center justify-center">
+                    <Sparkles className="w-12 h-12 text-[var(--color-secondary)]" />
+                  </div>
+                  <p className="text-[var(--color-gray-400)] text-sm">Imagen representativa</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

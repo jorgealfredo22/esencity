@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { Loader } from '@/components/shared/Loader';
 import { ErrorState } from '@/components/shared/ErrorState';
@@ -34,15 +33,15 @@ export function InstagramFeed() {
   }, []);
 
   return (
-    <section className="py-20 md:py-32 bg-[var(--color-white)]">
-      <Container size="lg">
+    <section className="py-20 md:py-32 bg-[var(--color-primary)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="text-[var(--color-secondary)] text-sm font-semibold tracking-widest uppercase mb-3">
-            Instagram
-          </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-primary)] font-primary mb-6">
-            Síguenos en Instagram
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-white)] font-primary mb-4">
+            Conoce nuestros Resultados
           </h2>
+          <p className="text-[var(--color-gray-400)] max-w-2xl mx-auto text-lg">
+            Síguenos en Instagram y descubre las últimas tendencias
+          </p>
         </div>
 
         {loading ? (
@@ -53,7 +52,7 @@ export function InstagramFeed() {
             message={error}
             action={
               <Button
-                variant="outline"
+                variant="primary"
                 href={getInstagramProfileUrl(username)}
                 target="_blank"
               >
@@ -63,12 +62,12 @@ export function InstagramFeed() {
           />
         ) : posts.length === 0 ? (
           <div className="text-center py-12">
-            <Camera className="w-16 h-16 text-[var(--color-gray-300)] mx-auto mb-4" />
-            <p className="text-[var(--color-gray-500)] mb-6">
+            <Camera className="w-16 h-16 text-[var(--color-gray-600)] mx-auto mb-4" />
+            <p className="text-[var(--color-gray-400)] mb-6">
               No hay publicaciones para mostrar
             </p>
             <Button
-              variant="outline"
+              variant="primary"
               href={getInstagramProfileUrl(username)}
               target="_blank"
             >
@@ -77,17 +76,19 @@ export function InstagramFeed() {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-1">
               {posts.map((post) => (
                 <a
                   key={post.id}
                   href={post.permalink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative aspect-square bg-[var(--color-gray-100)] rounded-xl overflow-hidden group"
+                  className="relative aspect-square bg-[var(--color-primary-light)] overflow-hidden group"
                 >
-                  <div className="w-full h-full bg-gradient-to-br from-[var(--color-secondary)]/20 to-[var(--color-primary)]/20" />
-                  <div className="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/60 transition-colors flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100">
+                  <div className="w-full h-full bg-gradient-to-br from-[var(--color-secondary)]/20 to-[var(--color-primary-light)] flex items-center justify-center">
+                    <Camera className="w-8 h-8 text-[var(--color-gray-600)]" />
+                  </div>
+                  <div className="absolute inset-0 bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)]/70 transition-colors flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100">
                     <span className="flex items-center gap-2 text-[var(--color-white)]">
                       <Heart className="w-5 h-5" />
                       <span className="text-sm font-medium">0</span>
@@ -101,9 +102,9 @@ export function InstagramFeed() {
               ))}
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
-                variant="outline"
+                variant="primary"
                 size="lg"
                 href={getInstagramProfileUrl(username)}
                 target="_blank"
@@ -114,7 +115,7 @@ export function InstagramFeed() {
             </div>
           </>
         )}
-      </Container>
+      </div>
     </section>
   );
 }
