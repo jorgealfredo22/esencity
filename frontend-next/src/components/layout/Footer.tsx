@@ -107,7 +107,7 @@ export function Footer() {
                 </a>
               </div>
             </div>
-            <div className="rounded-xl overflow-hidden border border-text-inverse/10">
+            <div className="rounded-xl overflow-hidden border border-text-inverse/10 mb-3">
               <iframe
                 src={`https://www.google.com/maps?q=${encodeURIComponent(`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.country}`)}&output=embed`}
                 width="100%"
@@ -119,6 +119,15 @@ export function Footer() {
                 title="Ubicación Esencity"
               />
             </div>
+            <a
+              href={`https://www.google.com/maps/search/${encodeURIComponent(`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.country}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-secondary hover:text-secondary-dark transition-colors font-medium"
+            >
+              Dejar una reseña
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7"/></svg>
+            </a>
             
           </div>
         </div>
