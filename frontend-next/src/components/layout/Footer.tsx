@@ -93,7 +93,7 @@ export function Footer() {
             <h4 className="text-text-inverse text-sm font-semibold uppercase tracking-wider mb-5">
               Ubicación
             </h4>
-            <div className="flex items-start gap-3 text-text-inverse-secondary/60 text-sm mb-6">
+            <div className="flex items-start gap-3 text-text-inverse-secondary/60 text-sm mb-4">
               <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5 text-secondary" />
               <div>
                 <a
@@ -106,6 +106,18 @@ export function Footer() {
                   {siteConfig.address.city}, {siteConfig.address.country}
                 </a>
               </div>
+            </div>
+            <div className="rounded-xl overflow-hidden border border-text-inverse/10">
+              <iframe
+                src={`https://www.google.com/maps?q=${encodeURIComponent(`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.country}`)}&output=embed`}
+                width="100%"
+                height="160"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Ubicación Esencity"
+              />
             </div>
             
           </div>
