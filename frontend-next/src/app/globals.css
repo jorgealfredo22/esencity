@@ -77,7 +77,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  color: #ffffff;
+  color: var(--color-text);
   background-color: var(--color-surface);
   line-height: 1.6;
 }
@@ -157,14 +157,6 @@ select {
     padding-top: 7rem;
     padding-bottom: 7rem;
   }
-}
-
-.object-contain {
-  object-fit: initial;
-}
-
-.h-full {
-  height: initial;
 }
 
 .container-custom {
