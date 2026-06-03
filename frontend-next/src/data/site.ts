@@ -12,6 +12,7 @@ export const siteConfig = {
   social: {
     instagram: 'https://www.instagram.com/goldenprizebarbershop?igsh=MXJwZ2lxejBtcjNicA==',
     facebook: 'https://www.facebook.com/share/18zJVW1cvv/',
+    tiktok: 'https://www.tiktok.com/@esencity_barberia?_r=1&_t=ZS-96rTZA1Ohs4',
     whatsapp: 'https://wa.me/573204761569',
   },
   hours: {

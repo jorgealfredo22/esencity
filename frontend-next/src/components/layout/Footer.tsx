@@ -2,12 +2,13 @@ import Link from 'next/link';
 import { siteConfig } from '@/data/site';
 import { footerNavigation } from '@/data/navigation';
 import { BrandLogo } from '@/components/shared/BrandLogo';
-import { InstagramIcon, FacebookIcon, WhatsAppIcon } from '@/components/shared/SocialIcons';
+import { InstagramIcon, FacebookIcon, WhatsAppIcon, TikTokIcon } from '@/components/shared/SocialIcons';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const socialLinks = [
   { icon: InstagramIcon, href: siteConfig.social.instagram, label: 'Instagram' },
   { icon: FacebookIcon, href: siteConfig.social.facebook, label: 'Facebook' },
+  { icon: TikTokIcon, href: siteConfig.social.tiktok, label: 'TikTok' },
   { icon: WhatsAppIcon, href: siteConfig.social.whatsapp, label: 'WhatsApp' },
 ];
 
