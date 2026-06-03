@@ -1,5 +1,7 @@
 import { ServicesHero } from "@/components/servicios/ServicesHero";
 import { ServicesGrid } from "@/components/servicios/ServicesGrid";
+import { servicesData } from "@/data/services";
+import { ServiceCategory } from "@/types/service";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,11 +9,38 @@ export const metadata: Metadata = {
   description: "Descubrí nuestra amplia gama de servicios profesionales de peluquería. Cortes, coloración, tratamientos y más.",
 };
 
-export default function ServiciosPage() {
+async function fetchServices(): Promise<ServiceCategory[]> {
+  try {
+    const url = `${process.env.NEXT_PUBLIC_APPS_SCRIPT_URL}?action=getServices`;
+    const res = await fetch(url, {
+      next: { revalidate: 3600 },
+    });
+    const data = await res.json();
+    if (data.status === "success" && Array.isArray(data.data)) {
+      return data.data.map((cat: ServiceCategory) => ({
+        ...cat,
+        services: cat.services.map((s) => ({
+          ...s,
+            image: s.image
+                ? s.image.replace(
+                    /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w\d+/,
+                    '/api/apps-script/image?id=$1&sz=w1200'
+                  )
+                : null,
+        })),
+      }));
+    }
+  } catch {}
+  return servicesData;
+}
+
+export default async function ServiciosPage() {
+  const services = await fetchServices();
+
   return (
     <>
       <ServicesHero />
-      <ServicesGrid />
+      <ServicesGrid initialServices={services} />
     </>
   );
 }
