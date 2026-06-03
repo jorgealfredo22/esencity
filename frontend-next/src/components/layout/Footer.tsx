@@ -97,7 +97,7 @@ export function Footer() {
               <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5 text-secondary" />
               <div>
                 <a
-                  href={`https://www.google.com/maps/search/${encodeURIComponent(`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.country}`)}`}
+                  href="https://www.google.com/maps/place/Esencity+barber+studio/@5.7155527,-72.9291762,1181m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8e6a45007ac9d2bd:0x21c91150476fcf6a!8m2!3d5.7155527!4d-72.9291762!16s%2Fg%2F11npdjz68t?entry=ttu&g_ep=EgoyMDI2MDUzMS4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-secondary transition-colors"
@@ -109,7 +109,7 @@ export function Footer() {
             </div>
             <div className="rounded-xl overflow-hidden border border-text-inverse/10 mb-3">
               <iframe
-                src={`https://www.google.com/maps?q=${encodeURIComponent(`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.country}`)}&output=embed`}
+                src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.8901!2d-72.9291762!3d5.7155527!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6a45007ac9d2bd%3A0x21c91150476fcf6a!2sEsencity%20barber%20studio!5e0!3m2!1ses!2sco!4v1748999365000!5m2!1ses!2sco`}
                 width="100%"
                 height="160"
                 style={{ border: 0 }}
@@ -120,7 +120,7 @@ export function Footer() {
               />
             </div>
             <a
-              href={`https://www.google.com/maps/search/${encodeURIComponent(`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.country}`)}`}
+              href="https://www.google.com/maps/place/Esencity+barber+studio/@5.7155527,-72.9291762,1181m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8e6a45007ac9d2bd:0x21c91150476fcf6a!8m2!3d5.7155527!4d-72.9291762!16s%2Fg%2F11npdjz68t?entry=ttu&g_ep=EgoyMDI2MDUzMS4wIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-sm text-secondary hover:text-secondary-dark transition-colors font-medium"
