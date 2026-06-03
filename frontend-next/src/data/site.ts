@@ -11,7 +11,7 @@ export const siteConfig = {
   },
   social: {
     instagram: 'https://instagram.com/esenc.ity',
-    facebook: 'https://facebook.com/esencity',
+    facebook: 'https://www.facebook.com/share/18zJVW1cvv/',
     whatsapp: 'https://wa.me/573204761569',
   },
   hours: {
