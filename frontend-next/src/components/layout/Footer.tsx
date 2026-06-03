@@ -95,10 +95,17 @@ export function Footer() {
             </h4>
             <div className="flex items-start gap-3 text-text-inverse-secondary/60 text-sm mb-6">
               <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5 text-secondary" />
-              <span>
-                {siteConfig.address.street}<br />
-                {siteConfig.address.city}, {siteConfig.address.country}
-              </span>
+              <div>
+                <a
+                  href={`https://www.google.com/maps/search/${encodeURIComponent(`${siteConfig.address.street}, ${siteConfig.address.city}, ${siteConfig.address.country}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-secondary transition-colors"
+                >
+                  {siteConfig.address.street}<br />
+                  {siteConfig.address.city}, {siteConfig.address.country}
+                </a>
+              </div>
             </div>
             
           </div>
