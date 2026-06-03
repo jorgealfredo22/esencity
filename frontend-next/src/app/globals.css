@@ -159,6 +159,14 @@ select {
   }
 }
 
+.object-contain {
+  object-fit: initial;
+}
+
+.h-full {
+  height: initial;
+}
+
 .container-custom {
   max-width: 80rem;
   margin-left: auto;
