@@ -10,7 +10,7 @@ export const siteConfig = {
     country: 'Boyacá, Colombia',
   },
   social: {
-    instagram: 'https://instagram.com/esenc.ity',
+    instagram: 'https://www.instagram.com/goldenprizebarbershop?igsh=MXJwZ2lxejBtcjNicA==',
     facebook: 'https://www.facebook.com/share/18zJVW1cvv/',
     whatsapp: 'https://wa.me/573204761569',
   },
