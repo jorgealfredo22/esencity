@@ -6,15 +6,27 @@ import { Button } from '@/components/ui/Button';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const serviceImages: Record<string, string> = {
+const fallbackImages: Record<string, string> = {
   'corte-styling': 'https://images.unsplash.com/photo-1503951914875-452162a0f6f1?q=80&w=800&auto=format&fit=crop',
-  'coloracion': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto-format=fit=crop',
+  'coloracion': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format=fit=crop',
   'tratamientos': 'https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto=format=fit=crop',
   'peinados': 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=800&auto=format=fit=crop',
 };
 
-export function FeaturedServicesSlider() {
+interface FeaturedServicesSliderProps {
+  featuredImages?: Record<string, string> | null;
+}
+
+const featuredToCategory: Record<string, string> = {
+  'corte-styling': 'corte',
+  'coloracion': 'color',
+  'tratamientos': 'tratamientos',
+  'peinados': 'peinados',
+};
+
+export function FeaturedServicesSlider({ featuredImages }: FeaturedServicesSliderProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const images = { ...fallbackImages, ...featuredImages };
 
   const scroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {
@@ -49,12 +61,12 @@ export function FeaturedServicesSlider() {
             {featuredServices.map((service) => (
               <a
                 key={service.id}
-                href="/servicios"
+                href={`/servicios#${featuredToCategory[service.id] || ''}`}
                 className="group block relative min-w-[350px] h-[450px] rounded-xl overflow-hidden flex-shrink-0"
               >
                 <div
                   className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                  style={{ backgroundImage: `url('${serviceImages[service.id]}')` }}
+                  style={{ backgroundImage: `url('${images[service.id]}')` }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">

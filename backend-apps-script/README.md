@@ -1,113 +1,68 @@
-# Esencity Backend - Google Apps Script
+# Esencity Backend — Google Apps Script
 
-Backend API para el sitio web de Esencity Peluquería, construido con Google Apps Script.
+Backend API para Esencity Peluquería. Provee servicios, galería, feed de Instagram y formulario de contacto.
 
-## Estructura de archivos
+## Estructura
 
-- `Code.gs` - Punto de entrada principal (doGet/doPost)
-- `Config.gs` - Configuración del proyecto
-- `DriveService.gs` - Servicio para obtener imágenes de Google Drive
-- `InstagramService.gs` - Servicio para obtener posts de Instagram
-- `ResponseService.gs` - Helpers de respuesta y servicios de datos
-- `appsscript.json` - Configuración del proyecto Apps Script
+| Archivo | Descripción |
+|---------|-------------|
+| `appsscript.json` | Manifiesto del proyecto (timezone, scopes, acceso) |
+| `Config.gs` | Variables de configuración (Drive, Instagram, Sheets) |
+| `DriveService.gs` | Lectura de imágenes desde Google Drive |
+| `InstagramService.gs` | Feed de Instagram vía Facebook Graph API |
+| `ResponseService.gs` | Datos de servicios, formulario de contacto |
+| `Code.gs` | Punto de entrada (doGet / doPost) |
+
+El código completo de cada archivo está en [CODIGO.md](./CODIGO.md).
 
 ## Configuración
 
-### 1. Crear proyecto en Google Apps Script
+### Variables en `Config.gs`
 
-1. Ir a [script.google.com](https://script.google.com)
-2. Crear un nuevo proyecto
-3. Copiar todos los archivos `.gs` y `appsscript.json` al proyecto
+| Variable | Valor | Descripción |
+|----------|-------|-------------|
+| `DRIVE_FOLDER_ID` | `YOUR_DRIVE_FOLDER_ID` | Carpeta de Drive para galería |
+| `SERVICE_IMAGES_FOLDER_ID` | ID de carpeta | Carpeta con imágenes de servicios |
+| `INSTAGRAM_ACCESS_TOKEN` | `YOUR_INSTAGRAM_ACCESS_TOKEN` | Token de Facebook Graph API |
+| `INSTAGRAM_ACCOUNT_ID` | `YOUR_INSTAGRAM_ACCOUNT_ID` | ID de cuenta de Instagram Business |
+| `SPREADSHEET_ID` | `YOUR_SPREADSHEET_ID` | Google Sheet para formulario de contacto |
 
-### 2. Configurar variables en `Config.gs`
+### Deploy
 
-```javascript
-var CONFIG = {
-  DRIVE_FOLDER_ID: 'TU_DRIVE_FOLDER_ID',
-  INSTAGRAM_ACCESS_TOKEN: 'TU_INSTAGRAM_ACCESS_TOKEN',
-  INSTAGRAM_ACCOUNT_ID: 'TU_INSTAGRAM_ACCOUNT_ID',
-  SPREADSHEET_ID: 'TU_SPREADSHEET_ID',
-  CONTACT_SHEET_NAME: 'Contactos',
-  ALLOWED_ORIGINS: ['https://esencity.com', 'http://localhost:3000'],
-  CACHE_DURATION: 3600
-};
-```
+1. Seleccionar `getServices` del desplegable y ejecutar ▶️ (autorizar permisos)
+2. **Implementar → Nueva implementación → Aplicación web**
+3. Ejecutar como: **Yo** — Acceso: **Cualquier persona**
+4. Copiar la URL y configurarla en `frontend-next/.env.local` como `NEXT_PUBLIC_APPS_SCRIPT_URL`
 
-### 3. Configurar Google Drive
-
-1. Crear una carpeta en Google Drive para las imágenes de la galería
-2. Copiar el ID de la carpeta (la parte final de la URL)
-3. Actualizar `DRIVE_FOLDER_ID` en `Config.gs`
-
-### 4. Configurar Instagram API
-
-1. Crear una app en [Facebook Developers](https://developers.facebook.com/)
-2. Obtener un token de acceso para Instagram Graph API
-3. Obtener el ID de la cuenta de Instagram
-4. Actualizar `INSTAGRAM_ACCESS_TOKEN` e `INSTAGRAM_ACCOUNT_ID` en `Config.gs`
-
-### 5. Configurar Google Sheets
-
-1. Crear una Google Sheet para almacenar los contactos
-2. Copiar el ID de la sheet (la parte final de la URL)
-3. Actualizar `SPREADSHEET_ID` en `Config.gs`
-
-### 6. Deploy
-
-1. Click en "Deploy" > "New deployment"
-2. Seleccionar tipo "Web app"
-3. Configurar:
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-4. Click en "Deploy"
-5. Copiar la URL del web app
-6. Actualizar `NEXT_PUBLIC_APPS_SCRIPT_URL` en `.env.local` del frontend
-
-## Endpoints
+## Endpoints API
 
 ### GET
 
-- `?action=getServices` - Obtiene la lista de servicios
-- `?action=getGallery` - Obtiene las imágenes de la galería desde Drive
-- `?action=getInstagramFeed` - Obtiene el feed de Instagram
+| Parámetro | Retorna |
+|-----------|---------|
+| `?action=getServices` | Categorías y servicios con imágenes de Drive |
+| `?action=getGallery` | Imágenes de la galería |
+| `?action=getInstagramFeed` | Posts de Instagram |
 
 ### POST
-
-- `action: 'submitContact'` - Envía un formulario de contacto
 
 ```json
 {
   "action": "submitContact",
-  "name": "Juan Pérez",
-  "email": "juan@email.com",
-  "phone": "+541112345678",
-  "message": "Quiero reservar un turno"
+  "name": "Nombre",
+  "email": "email@ejemplo.com",
+  "phone": "+54...",
+  "message": "Mensaje"
 }
 ```
 
-## Respuestas
-
-Todas las respuestas siguen este formato:
+Todas las respuestas siguen el formato:
 
 ```json
 {
   "status": "success",
-  "message": "Descripción de la respuesta",
+  "message": "Descripción",
   "timestamp": "2024-01-01T00:00:00.000Z",
   "data": {}
 }
-```
-
-## Desarrollo
-
-Para probar localmente:
-
-1. Usar [clasp](https://github.com/google/clasp) para sincronizar archivos
-2. O copiar manualmente los archivos al editor de Apps Script
-
-```bash
-npm install -g @google/clasp
-clasp login
-clasp create --type standalone
-clasp push
 ```

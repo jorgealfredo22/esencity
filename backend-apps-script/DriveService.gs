@@ -36,6 +36,34 @@ function getGallery() {
   }
 }
 
+function getServiceImages() {
+  try {
+    var folderId = CONFIG.SERVICE_IMAGES_FOLDER_ID;
+    if (!folderId || folderId.indexOf('YOUR_') === 0) {
+      return {};
+    }
+    var folder = DriveApp.getFolderById(folderId);
+    var files = folder.getFiles();
+    var imageMap = {};
+
+    while (files.hasNext()) {
+      var file = files.next();
+      var mimeType = file.getMimeType();
+
+      if (mimeType.indexOf('image') !== -1) {
+        var name = file.getName();
+        var serviceId = name.replace(/\.[^.]+$/, '');
+        imageMap[serviceId] = 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1200';
+      }
+    }
+
+    return imageMap;
+  } catch (error) {
+    console.error('Error fetching service images: ' + error.toString());
+    return {};
+  }
+}
+
 function getDriveFileUrl(fileId) {
   return 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w1000';
 }

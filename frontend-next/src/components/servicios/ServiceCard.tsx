@@ -44,9 +44,18 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
   return (
     <div className="bg-surface-elevated rounded-xl overflow-hidden border border-border hover:shadow-md transition-shadow">
       <div className="aspect-[4/3] bg-surface-alt relative overflow-hidden">
-        <div className="w-full h-full flex items-center justify-center">
-          <span className="text-text-muted text-sm">Imagen de {service.name}</span>
-        </div>
+        {service.image ? (
+          <img
+            src={service.image}
+            alt={service.name}
+            className="absolute inset-0 w-full h-full object-cover max-w-none"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="text-text-muted text-sm">Imagen de {service.name}</span>
+          </div>
+        )}
       </div>
       <div className="p-5">
         <h3 className="text-lg font-bold text-text font-display mb-1.5">

@@ -10,7 +10,7 @@ export const siteConfig = {
     country: 'Boyacá, Colombia',
   },
   social: {
-    instagram: 'https://instagram.com/esencity',
+    instagram: 'https://instagram.com/esenc.ity',
     facebook: 'https://facebook.com/esencity',
     whatsapp: 'https://wa.me/573204761569',
   },
