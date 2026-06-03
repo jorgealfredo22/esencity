@@ -33,7 +33,7 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
               </span>
             )}
           </div>
-          <Button variant="ghost" size="sm" href={siteConfig.social.whatsapp}>
+          <Button variant="ghost" size="sm" href={siteConfig.social.booking}>
             Reservar
           </Button>
         </div>
@@ -78,7 +78,7 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
               </span>
             )}
           </div>
-          <Button variant="primary" size="sm" href={siteConfig.social.whatsapp}>
+          <Button variant="primary" size="sm" href={siteConfig.social.booking}>
             Reservar
           </Button>
         </div>

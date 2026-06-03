@@ -59,7 +59,7 @@ export function Hero() {
           <Button
             variant="primary"
             size="lg"
-            href={siteConfig.social.whatsapp}
+            href={siteConfig.social.booking}
           >
             Agenda tu cita ahora
           </Button>

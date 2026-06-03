@@ -37,7 +37,7 @@ export function ContactSection() {
             <Button
               variant="primary"
               size="lg"
-              href={siteConfig.social.whatsapp}
+              href={siteConfig.social.booking}
               icon={<MessageCircle className="w-5 h-5" />}
             >
               Reservar mi cita

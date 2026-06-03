@@ -14,6 +14,7 @@ export const siteConfig = {
     facebook: 'https://www.facebook.com/share/18zJVW1cvv/',
     tiktok: 'https://www.tiktok.com/@esencity_barberia?_r=1&_t=ZS-96rTZA1Ohs4',
     whatsapp: 'https://wa.me/573204761569',
+    booking: 'https://citas.esencitybarber.com/',
   },
   hours: {
     monday: '10:00 - 20:00',

@@ -78,7 +78,7 @@ export function Header() {
             <Button
               variant="primary"
               size="sm"
-              href={siteConfig.social.whatsapp}
+              href={siteConfig.social.booking}
             >
               Agenda tu cita
             </Button>
@@ -114,7 +114,7 @@ export function Header() {
               <Button
                 variant="primary"
                 size="md"
-                href={siteConfig.social.whatsapp}
+                href={siteConfig.social.booking}
                 className="w-full"
               >
                 Agenda tu cita
