@@ -3,6 +3,7 @@ import { About } from "@/components/home/About";
 import { FeaturedServicesSlider } from "@/components/home/FeaturedServicesSlider";
 import { StaticGallery } from "@/components/home/StaticGallery";
 import { InstagramFeed } from "@/components/home/InstagramFeed";
+import { LocationSection } from "@/components/home/LocationSection";
 import { ContactSection } from "@/components/home/ContactSection";
 import { getServices } from "@/lib/appsScriptApi-server";
 
@@ -43,6 +44,7 @@ export default async function Home() {
       <FeaturedServicesSlider featuredImages={featuredImages} />
       <StaticGallery />
       <InstagramFeed />
+      <LocationSection />
       <ContactSection />
     </>
   );
