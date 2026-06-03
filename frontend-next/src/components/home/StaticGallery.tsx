@@ -38,7 +38,6 @@ export function StaticGallery({ images }: StaticGalleryProps) {
   const movedRef = useRef(0);
   const rafRef = useRef<number>(0);
   const pausedRef = useRef(false);
-  const pointerIdRef = useRef<number | null>(null);
 
   const animate = useCallback(() => {
     if (!draggingRef.current && !pausedRef.current) {
@@ -66,8 +65,6 @@ export function StaticGallery({ images }: StaticGalleryProps) {
     draggingRef.current = true;
     movedRef.current = 0;
     lastXRef.current = e.clientX;
-    pointerIdRef.current = e.pointerId;
-    containerRef.current?.setPointerCapture(e.pointerId);
   }, []);
 
   const handlePointerMove = useCallback((e: React.PointerEvent) => {
@@ -88,10 +85,6 @@ export function StaticGallery({ images }: StaticGalleryProps) {
 
   const handlePointerUp = useCallback(() => {
     draggingRef.current = false;
-    if (pointerIdRef.current != null) {
-      containerRef.current?.releasePointerCapture(pointerIdRef.current);
-      pointerIdRef.current = null;
-    }
   }, []);
 
   const wasDrag = useCallback(() => movedRef.current > 5, []);
@@ -105,58 +98,61 @@ export function StaticGallery({ images }: StaticGalleryProps) {
           description="Conocé los resultados de quienes ya vivieron la experiencia Esencity."
           className="max-w-3xl mx-auto mb-12 md:mb-16"
         />
+      </div>
 
-        <div
-          ref={containerRef}
-          className="relative overflow-hidden rounded-xl cursor-grab active:cursor-grabbing select-none touch-pan-y"
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerUp}
-          onPointerCancel={handlePointerUp}
-          onPointerLeave={handlePointerUp}
-          onMouseEnter={() => { pausedRef.current = true; }}
-          onMouseLeave={() => { pausedRef.current = false; }}
-          onTouchStart={() => { pausedRef.current = true; }}
-          onTouchEnd={() => { pausedRef.current = false; }}
-        >
-          <div ref={trackRef} className="flex will-change-transform">
-            {duplicatedImages.map((image, index) => (
-              <div
-                key={`${image.id}-${index}`}
-                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/4 p-2"
+      <div
+        ref={containerRef}
+        className="relative overflow-hidden cursor-grab active:cursor-grabbing select-none touch-pan-y"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onPointerLeave={handlePointerUp}
+        onMouseEnter={() => { pausedRef.current = true; }}
+        onMouseLeave={() => { pausedRef.current = false; }}
+        onTouchStart={() => { pausedRef.current = true; }}
+        onTouchEnd={() => { pausedRef.current = false; }}
+      >
+        <div ref={trackRef} className="flex will-change-transform">
+          {duplicatedImages.map((image, index) => (
+            <div
+              key={`${image.id}-${index}`}
+                className="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2"
+            >
+              <button
+                onClick={() => { if (!wasDrag()) setSelectedImage(image); }}
+                className="relative aspect-square w-full rounded-xl overflow-hidden group cursor-pointer transition-all duration-500 shadow-sm hover:shadow-xl border border-border/50 hover:border-secondary/30"
               >
-                <button
-                  onClick={() => { if (!wasDrag()) setSelectedImage(image); }}
-                  className="relative aspect-square w-full rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-lg"
-                >
-                  <img
-                    src={image.url}
-                    alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 pointer-events-none"
-                    draggable={false}
-                  />
-                  <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-colors flex items-center justify-center">
-                    <Expand className="w-6 h-6 text-text-inverse opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </div>
-                </button>
-              </div>
-            ))}
-          </div>
+                <img
+                  src={image.url}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 pointer-events-none"
+                  draggable={false}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/30 transition-colors duration-500 flex items-center justify-center">
+                  <Expand className="w-7 h-7 text-text-inverse opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100" />
+                </div>
+              </button>
+            </div>
+          ))}
         </div>
       </div>
 
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-primary/95 flex items-center justify-center p-4 animate-fade-in"
+          className="fixed inset-0 z-50 bg-primary/90 backdrop-blur-md flex flex-col items-center justify-center p-4 sm:p-8 animate-fade-in"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="max-w-4xl w-full bg-surface-elevated rounded-xl overflow-hidden">
-            <div className="aspect-video">
-              <img src={selectedImage.url} alt={selectedImage.alt} className="w-full h-full object-cover" />
-            </div>
+          <div className="relative max-w-3xl max-h-[85vh] w-full flex items-center justify-center">
+            <img
+              src={selectedImage.url}
+              alt={selectedImage.alt}
+              className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
+            />
           </div>
           <button
-            className="absolute top-4 right-4 w-10 h-10 bg-surface-elevated rounded-full flex items-center justify-center text-text hover:bg-secondary hover:text-text-inverse transition-colors"
+            className="absolute top-4 right-4 w-12 h-12 bg-surface-elevated rounded-full flex items-center justify-center text-text hover:bg-secondary hover:text-text-inverse transition-colors shadow-lg text-xl font-light"
             onClick={() => setSelectedImage(null)}
           >
             ✕
