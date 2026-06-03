@@ -1,9 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/Button';
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { useInView } from '@/hooks/useInView';
 import { GalleryImage } from '@/types/gallery';
 import { Expand } from 'lucide-react';
 
@@ -21,13 +19,85 @@ interface StaticGalleryProps {
   images?: GalleryImage[] | null;
 }
 
+const SPEED = 80;
+
 export function StaticGallery({ images }: StaticGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
-  const { ref, isInView } = useInView({ threshold: 0.1 });
   const displayImages = images && images.length > 0 ? images : fallbackImages;
 
+  const duplicatedImages = useMemo(
+    () => [...displayImages, ...displayImages],
+    [displayImages]
+  );
+
+  const trackRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef(0);
+  const draggingRef = useRef(false);
+  const lastXRef = useRef(0);
+  const movedRef = useRef(0);
+  const rafRef = useRef<number>(0);
+  const pausedRef = useRef(false);
+  const pointerIdRef = useRef<number | null>(null);
+
+  const animate = useCallback(() => {
+    if (!draggingRef.current && !pausedRef.current) {
+      positionRef.current -= SPEED / 60;
+
+      const halfWidth = (trackRef.current?.scrollWidth ?? 0) / 2;
+      if (positionRef.current <= -halfWidth) {
+        positionRef.current += halfWidth;
+      }
+    }
+
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translateX(${positionRef.current}px)`;
+    }
+
+    rafRef.current = requestAnimationFrame(animate);
+  }, []);
+
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [animate]);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    draggingRef.current = true;
+    movedRef.current = 0;
+    lastXRef.current = e.clientX;
+    pointerIdRef.current = e.pointerId;
+    containerRef.current?.setPointerCapture(e.pointerId);
+  }, []);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    if (!draggingRef.current || !trackRef.current) return;
+
+    const dx = e.clientX - lastXRef.current;
+    lastXRef.current = e.clientX;
+    movedRef.current += Math.abs(dx);
+    positionRef.current += dx;
+
+    const halfWidth = trackRef.current.scrollWidth / 2;
+    if (positionRef.current > 0) {
+      positionRef.current -= halfWidth;
+    } else if (positionRef.current < -halfWidth) {
+      positionRef.current += halfWidth;
+    }
+  }, []);
+
+  const handlePointerUp = useCallback(() => {
+    draggingRef.current = false;
+    if (pointerIdRef.current != null) {
+      containerRef.current?.releasePointerCapture(pointerIdRef.current);
+      pointerIdRef.current = null;
+    }
+  }, []);
+
+  const wasDrag = useCallback(() => movedRef.current > 5, []);
+
   return (
-    <section id="galeria" ref={ref} className="section-padding bg-surface">
+    <section id="galeria" className="section-padding bg-surface">
       <div className="container-custom">
         <SectionHeading
           subtitle="Resultados Reales"
@@ -36,32 +106,42 @@ export function StaticGallery({ images }: StaticGalleryProps) {
           className="max-w-3xl mx-auto mb-12 md:mb-16"
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-          {displayImages.map((image, index) => (
-            <button
-              key={image.id}
-              onClick={() => setSelectedImage(image)}
-              className={`relative aspect-square rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              }`}
-              style={{ transitionDelay: `${index * 50}ms` }}
-            >
-              <img
-                src={image.url}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-colors flex items-center justify-center">
-                <Expand className="w-6 h-6 text-text-inverse opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div
+          ref={containerRef}
+          className="relative overflow-hidden rounded-xl cursor-grab active:cursor-grabbing select-none touch-pan-y"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          onPointerLeave={handlePointerUp}
+          onMouseEnter={() => { pausedRef.current = true; }}
+          onMouseLeave={() => { pausedRef.current = false; }}
+          onTouchStart={() => { pausedRef.current = true; }}
+          onTouchEnd={() => { pausedRef.current = false; }}
+        >
+          <div ref={trackRef} className="flex will-change-transform">
+            {duplicatedImages.map((image, index) => (
+              <div
+                key={`${image.id}-${index}`}
+                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/4 p-2"
+              >
+                <button
+                  onClick={() => { if (!wasDrag()) setSelectedImage(image); }}
+                  className="relative aspect-square w-full rounded-lg overflow-hidden group cursor-pointer transition-all duration-300 hover:shadow-lg"
+                >
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 pointer-events-none"
+                    draggable={false}
+                  />
+                  <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-colors flex items-center justify-center">
+                    <Expand className="w-6 h-6 text-text-inverse opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                </button>
               </div>
-            </button>
-          ))}
-        </div>
-
-        <div className="text-center mt-10">
-          <Button variant="outline" size="lg" href="/servicios">
-            Ver galería completa
-          </Button>
+            ))}
+          </div>
         </div>
       </div>
 
