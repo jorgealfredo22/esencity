@@ -60,7 +60,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <About featuredImages={featuredImages} />
+      <About />
       <FeaturedServicesSlider featuredImages={featuredImages} />
       <StaticGallery images={galleryImages} />
       <InstagramFeed />
