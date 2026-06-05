@@ -2,9 +2,9 @@ import { ServiceCategory } from '@/types/service';
 
 export const servicesData: ServiceCategory[] = [
   {
-    id: 'corte',
-    name: 'Corte & Styling',
-    description: 'Cortes modernos y clásicos para todos los estilos',
+    id: 'cortes',
+    name: 'Cortes',
+    description: 'Cortes personalizados que reflejan tu estilo único.',
     services: [
       {
         id: 'corte-mujer',
@@ -12,7 +12,7 @@ export const servicesData: ServiceCategory[] = [
         description: 'Corte personalizado con lavado y styling incluido',
         price: 3500,
         duration: '45 min',
-        category: 'corte',
+        category: 'cortes',
       },
       {
         id: 'corte-hombre',
@@ -20,7 +20,7 @@ export const servicesData: ServiceCategory[] = [
         description: 'Corte clásico o moderno con acabado perfecto',
         price: 2500,
         duration: '30 min',
-        category: 'corte',
+        category: 'cortes',
       },
       {
         id: 'corte-nino',
@@ -28,7 +28,7 @@ export const servicesData: ServiceCategory[] = [
         description: 'Corte divertido y profesional para los más pequeños',
         price: 2000,
         duration: '30 min',
-        category: 'corte',
+        category: 'cortes',
       },
       {
         id: 'brushing',
@@ -36,14 +36,76 @@ export const servicesData: ServiceCategory[] = [
         description: 'Secado y peinado profesional para cualquier ocasión',
         price: 2000,
         duration: '30 min',
-        category: 'corte',
+        category: 'cortes',
       },
     ],
   },
   {
-    id: 'color',
-    name: 'Coloración',
-    description: 'Técnicas de color de vanguardia para un look único',
+    id: 'barba',
+    name: 'Barba',
+    description: 'Definición limpia y detalle superior para una presencia más firme.',
+    services: [
+      {
+        id: 'barba-clasica',
+        name: 'Barba Clásica',
+        description: 'Definición limpia para una presencia más firme.',
+        price: 2000,
+        duration: '20 min',
+        category: 'barba',
+      },
+      {
+        id: 'barba-premium',
+        name: 'Barba Premium',
+        description: 'Detalle superior para una barba con carácter.',
+        price: 3000,
+        duration: '30 min',
+        category: 'barba',
+      },
+    ],
+  },
+  {
+    id: 'facial',
+    name: 'Facial',
+    description: 'Frescura y cuidado para una piel impecable.',
+    services: [
+      {
+        id: 'limpieza-facial',
+        name: 'Limpieza Facial',
+        description: 'Frescura y cuidado para una piel impecable.',
+        price: 3000,
+        duration: '30 min',
+        category: 'facial',
+      },
+      {
+        id: 'hidratacion',
+        name: 'Hidratación Profunda',
+        description: 'Tratamiento intensivo de hidratación y nutrición.',
+        price: 5000,
+        duration: '1 hr',
+        category: 'facial',
+      },
+      {
+        id: 'keratina',
+        name: 'Keratina',
+        description: 'Alisado y brillo con tratamiento de keratina profesional.',
+        price: 15000,
+        duration: '2-3 hrs',
+        category: 'facial',
+      },
+      {
+        id: 'botox-capilar',
+        name: 'Botox Capilar',
+        description: 'Rejuvenecimiento y volumen para cabello dañado.',
+        price: 8000,
+        duration: '1.5 hrs',
+        category: 'facial',
+      },
+    ],
+  },
+  {
+    id: 'cabello',
+    name: 'Cabello',
+    description: 'Ondas, cepillados y color. Todo lo que necesitás para un look que resalte tu esencia.',
     services: [
       {
         id: 'color-completo',
@@ -51,7 +113,7 @@ export const servicesData: ServiceCategory[] = [
         description: 'Tinte completo con productos de alta calidad',
         price: 8000,
         duration: '2 hrs',
-        category: 'color',
+        category: 'cabello',
       },
       {
         id: 'mechas',
@@ -59,7 +121,7 @@ export const servicesData: ServiceCategory[] = [
         description: 'Mechas naturales o llamativas con técnica balayage',
         price: 12000,
         duration: '3 hrs',
-        category: 'color',
+        category: 'cabello',
       },
       {
         id: 'reflejos',
@@ -67,7 +129,7 @@ export const servicesData: ServiceCategory[] = [
         description: 'Reflejos sutiles para dar dimensión y brillo',
         price: 9000,
         duration: '2.5 hrs',
-        category: 'color',
+        category: 'cabello',
       },
       {
         id: 'decoloracion',
@@ -75,61 +137,15 @@ export const servicesData: ServiceCategory[] = [
         description: 'Aclarado profesional con cuidado del cabello',
         price: 10000,
         duration: '2-3 hrs',
-        category: 'color',
+        category: 'cabello',
       },
-    ],
-  },
-  {
-    id: 'tratamientos',
-    name: 'Tratamientos',
-    description: 'Cuidado y restauración para un cabello saludable',
-    services: [
-      {
-        id: 'hidratacion',
-        name: 'Hidratación Profunda',
-        description: 'Tratamiento intensivo de hidratación y nutrición',
-        price: 5000,
-        duration: '1 hr',
-        category: 'tratamiento',
-      },
-      {
-        id: 'keratina',
-        name: 'Keratina',
-        description: 'Alisado y brillo con tratamiento de keratina profesional',
-        price: 15000,
-        duration: '2-3 hrs',
-        category: 'tratamiento',
-      },
-      {
-        id: 'botox-capilar',
-        name: 'Botox Capilar',
-        description: 'Rejuvenecimiento y volumen para cabello dañado',
-        price: 8000,
-        duration: '1.5 hrs',
-        category: 'tratamiento',
-      },
-      {
-        id: 'reconstruccion',
-        name: 'Reconstrucción',
-        description: 'Reparación profunda para cabello muy dañado',
-        price: 6000,
-        duration: '1.5 hrs',
-        category: 'tratamiento',
-      },
-    ],
-  },
-  {
-    id: 'peinados',
-    name: 'Peinados',
-    description: 'Peinados especiales para eventos y ocasiones únicas',
-    services: [
       {
         id: 'peinado-novia',
         name: 'Peinado de Novia',
         description: 'Look elegante para tu día especial con prueba incluida',
         price: 12000,
         duration: '1.5 hrs',
-        category: 'peinado',
+        category: 'cabello',
       },
       {
         id: 'peinado-fiesta',
@@ -137,7 +153,7 @@ export const servicesData: ServiceCategory[] = [
         description: 'Peinado elegante para eventos y celebraciones',
         price: 6000,
         duration: '1 hr',
-        category: 'peinado',
+        category: 'cabello',
       },
       {
         id: 'alaciado',
@@ -145,7 +161,7 @@ export const servicesData: ServiceCategory[] = [
         description: 'Alaciado profesional con plancha y productos protectores',
         price: 4000,
         duration: '1 hr',
-        category: 'peinado',
+        category: 'cabello',
       },
     ],
   },
