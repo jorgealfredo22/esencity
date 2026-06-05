@@ -12,13 +12,14 @@ interface ServicesGridProps {
 }
 
 export function ServicesGrid({ initialServices }: ServicesGridProps) {
-  const [activeCategory, setActiveCategory] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      const hash = window.location.hash.replace('#', '');
-      if (initialServices.some(cat => cat.id === hash)) return hash;
+  const [activeCategory, setActiveCategory] = useState<string>(initialServices[0]?.id || '');
+
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash && initialServices.some(cat => cat.id === hash)) {
+      setActiveCategory(hash);
     }
-    return initialServices[0]?.id || '';
-  });
+  }, [initialServices]);
 
   useEffect(() => {
     const onHashChange = () => {
