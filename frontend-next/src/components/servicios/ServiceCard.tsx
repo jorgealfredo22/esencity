@@ -33,7 +33,7 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
               </span>
             )}
           </div>
-          <Button variant="ghost" size="sm" href={siteConfig.social.whatsapp}>
+          <Button variant="ghost" size="sm" href="https://barberia-booking-2025.web.app">
             Reservar
           </Button>
         </div>
@@ -78,7 +78,7 @@ export function ServiceCard({ service, variant = 'default' }: ServiceCardProps) 
               </span>
             )}
           </div>
-          <Button variant="primary" size="sm" href={siteConfig.social.whatsapp}>
+          <Button variant="primary" size="sm" href="https://barberia-booking-2025.web.app">
             Reservar
           </Button>
         </div>

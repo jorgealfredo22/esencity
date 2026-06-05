@@ -37,7 +37,7 @@ export function ServicesGrid({ initialServices }: ServicesGridProps) {
     <section className="section-padding bg-surface">
       <Container size="lg">
         <SectionHeading
-          subtitle="Explorá"
+          subtitle="Explora"
           title="Todos nuestros servicios"
         />
 

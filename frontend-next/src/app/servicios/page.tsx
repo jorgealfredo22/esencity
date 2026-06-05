@@ -13,24 +13,26 @@ async function fetchServices(): Promise<ServiceCategory[]> {
   try {
     const url = `${process.env.NEXT_PUBLIC_APPS_SCRIPT_URL}?action=getServices`;
     const res = await fetch(url, {
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
+
     const data = await res.json();
+
     if (data.status === "success" && Array.isArray(data.data)) {
       return data.data.map((cat: ServiceCategory) => ({
         ...cat,
-        services: cat.services.map((s) => ({
-          ...s,
-            image: s.image
-                ? s.image.replace(
-                    /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w\d+/,
-                    '/api/apps-script/image?id=$1&sz=w1200'
-                  )
-                : null,
-        })),
+        services: Array.isArray(cat.services)
+          ? cat.services.map((s) => ({
+              ...s,
+              image: s.image || null,
+            }))
+          : [],
       }));
     }
-  } catch {}
+  } catch (error) {
+    console.error("Error fetching services:", error);
+  }
+
   return servicesData;
 }
 

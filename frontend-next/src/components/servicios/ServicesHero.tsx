@@ -27,8 +27,8 @@ export function ServicesHero() {
           </Button>
           <SectionHeading
             subtitle="Nuestros Servicios"
-            title="Descubrí el arte de tu belleza"
-            description="Agendá tu cita y descubrí por qué la belleza, en manos expertas, se convierte en arte."
+            title="Descubre el arte de tu belleza"
+            description="Agenda tu cita y descubre por qué la belleza en manos expertas, se convierte en arte."
             light
           />
         </div>
