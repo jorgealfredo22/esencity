@@ -23,10 +23,9 @@ export default async function Home() {
     if (response.status === "success" && Array.isArray(response.data)) {
       const categoryImages: Record<string, string> = {};
       const categoryMap: Record<string, string> = {
-        corte: "corte-styling",
-        color: "coloracion",
-        tratamientos: "tratamientos",
-        peinados: "peinados",
+        corte: "cortes",
+        tratamientos: "facial",
+        peinados: "cabello",
       };
       for (const category of response.data) {
         const featId = categoryMap[category.id];
