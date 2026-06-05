@@ -1,1 +1,6 @@
 .env.example
+.next/
+.open-next/
+.wrangler/
+.wranglerignore
+node_modules/
