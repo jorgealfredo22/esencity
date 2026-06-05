@@ -17,6 +17,26 @@ import {
 } from 'react-icons/gi';
 import { ArrowRight } from 'lucide-react';
 
+const fallbackImages: Record<string, string> = {
+  'corte-styling': 'https://images.unsplash.com/photo-1503951914875-452162a0f6f1?q=80&w=800&auto=format&fit=crop',
+  'coloracion': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format=fit=crop',
+  'tratamientos': 'https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto=format=fit=crop',
+  'peinados': 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=800&auto=format=fit=crop',
+};
+
+const experienceToImage: Record<string, string> = {
+  'Corte Para Caballero Básico': 'corte-styling',
+  'Corte Para Caballero Premium': 'corte-styling',
+  'Barba Clásica': 'corte-styling',
+  'Barba Premium': 'corte-styling',
+  'Limpieza Facial': 'tratamientos',
+  'Corte de Dama': 'corte-styling',
+  'Ondas de Agua': 'peinados',
+  'Cepillado Cabello Corto': 'peinados',
+  'Cepillado Cabello Largo': 'peinados',
+  'Asesoría de Imagen': 'coloracion',
+};
+
 const experiences = [
   { icon: GiScissors, title: 'Corte Para Caballero Básico', subtitle: 'Tu estilo empieza con un gran corte' },
   { icon: GiComb, title: 'Corte Para Caballero Premium', subtitle: 'Precisión premium para una imagen impecable' },
@@ -30,8 +50,13 @@ const experiences = [
   { icon: GiHeartBeats, title: 'Asesoría de Imagen', subtitle: 'Estilos hechos para destacar en cada ocasión' },
 ];
 
-export function About() {
+interface AboutProps {
+  featuredImages?: Record<string, string> | null;
+}
+
+export function About({ featuredImages }: AboutProps) {
   const { ref, isInView } = useInView({ threshold: 0.1 });
+  const images = { ...fallbackImages, ...featuredImages };
 
   return (
     <section id="nosotros" ref={ref} className="section-padding bg-surface flex flex-col items-center justify-center">
@@ -57,8 +82,22 @@ export function About() {
               }`}
               style={{ transitionDelay: `${index * 50}ms` }}
             >
-              <div className="w-14 h-14 rounded-full bg-secondary-muted flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300">
-                <exp.icon className="w-6 h-6 text-secondary group-hover:text-text-inverse transition-colors" />
+              <div className="w-14 h-14 rounded-full bg-secondary-muted flex items-center justify-center flex-shrink-0 group-hover:bg-secondary group-hover:scale-110 transition-all duration-300 overflow-hidden">
+                {(() => {
+                  const imageKey = experienceToImage[exp.title];
+                  const imageUrl = imageKey ? images[imageKey] : null;
+                  if (imageUrl) {
+                    return (
+                      <img
+                        src={imageUrl}
+                        alt={exp.title}
+                        className="w-full h-full object-cover group-hover:opacity-0 transition-opacity"
+                      />
+                    );
+                  }
+                  return null;
+                })()}
+                <exp.icon className="w-6 h-6 text-secondary group-hover:text-text-inverse transition-colors absolute" />
               </div>
               <div className="flex-1">
                 <h4 className="text-text font-medium text-base md:text-lg">
