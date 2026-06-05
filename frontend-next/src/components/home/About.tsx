@@ -3,19 +3,31 @@
 import { Button } from '@/components/ui/Button';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { useInView } from '@/hooks/useInView';
-import { Scissors, Sparkles, Heart, Hand, Crown, Palette, Star, Users, Eye, ScissorsLineDashed, ArrowRight } from 'lucide-react';
+import {
+  GiScissors,
+  GiBeard,
+  GiComb,
+  GiHairStrands,
+  GiCurlyMask,
+  GiRazor,
+  GiWomanElfFace,
+  GiMirrorMirror,
+  GiLargeDress,
+  GiHeartBeats,
+} from 'react-icons/gi';
+import { ArrowRight } from 'lucide-react';
 
 const experiences = [
-  { icon: Scissors, title: 'Barbería', subtitle: 'Estilo que marca diferencia' },
-  { icon: Sparkles, title: 'Spa Capilar', subtitle: 'Renueva, repara y brilla' },
-  { icon: Heart, title: 'Spa Corporal', subtitle: 'Relaja cuerpo, mente y alma' },
-  { icon: Hand, title: 'Spa Manos y Pies', subtitle: 'Elegancia celestial' },
-  { icon: Crown, title: 'Ocasiones Especiales', subtitle: 'Tu momento para brillar' },
-  { icon: Palette, title: 'Color', subtitle: 'Los tonos perfectos' },
-  { icon: Star, title: 'Make Up', subtitle: 'Belleza que se siente y se ve' },
-  { icon: Users, title: 'Hair Style Kids', subtitle: 'Estilo para los pequeños' },
-  { icon: Eye, title: 'Cejas y Pestañas', subtitle: 'Donde la expresión cobra vida' },
-  { icon: ScissorsLineDashed, title: 'Cortes y Peinados', subtitle: 'Elegancia en cada movimiento' },
+  { icon: GiScissors, title: 'Corte Para Caballero Básico', subtitle: 'Tu estilo empieza con un gran corte' },
+  { icon: GiComb, title: 'Corte Para Caballero Premium', subtitle: 'Precisión premium para una imagen impecable' },
+  { icon: GiBeard, title: 'Barba Clásica', subtitle: 'Definición limpia para una presencia más firme' },
+  { icon: GiRazor, title: 'Barba Premium', subtitle: 'Detalle superior para una barba con carácter' },
+  { icon: GiCurlyMask, title: 'Limpieza Facial', subtitle: 'Frescura y cuidado para una piel impecable' },
+  { icon: GiWomanElfFace, title: 'Corte de Dama', subtitle: 'Un look pensado para resaltar tu esencia' },
+  { icon: GiHairStrands, title: 'Ondas de Agua', subtitle: 'Movimiento, forma y elegancia en cada onda' },
+  { icon: GiMirrorMirror, title: 'Cepillado Cabello Corto', subtitle: 'Acabado ligero con estilo y movimiento' },
+  { icon: GiLargeDress, title: 'Cepillado Cabello Largo', subtitle: 'Suavidad, brillo y presencia que se notan' },
+  { icon: GiHeartBeats, title: 'Asesoría de Imagen', subtitle: 'Estilos hechos para destacar en cada ocasión' },
 ];
 
 export function About() {
@@ -29,7 +41,7 @@ export function About() {
           title="¿Qué experiencia quieres vivir hoy?"
           description={
             <>
-              Más de 20 años perfeccionando el arte del color, el corte y la transformación capilar.
+              Más de 10 años perfeccionando el arte del color, el corte y la transformación capilar.
               En <strong className="text-text font-semibold">Esencity</strong>, cada servicio es un ritual de belleza diseñado para resaltar tu esencia.
             </>
           }
