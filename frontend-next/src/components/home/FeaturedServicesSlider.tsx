@@ -7,15 +7,22 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const fallbackImages: Record<string, string> = {
-  'cortes': 'https://images.unsplash.com/photo-1503951914875-452162a0f6f1?q=80&w=800&auto=format&fit=crop',
-  'barba': 'https://images.unsplash.com/photo-1621605815971-fbc98d665fb8?q=80&w=800&auto=format&fit=crop',
-  'facial': 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop',
-  'cabello': 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=800&auto=format&fit=crop',
+  'corte-styling': 'https://images.unsplash.com/photo-1503951914875-452162a0f6f1?q=80&w=800&auto=format&fit=crop',
+  'coloracion': 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=800&auto=format&fit=crop',
+  'tratamientos': 'https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto=format&fit=crop',
+  'peinados': 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?q=80&w=800&auto=format&fit=crop',
 };
 
 interface FeaturedServicesSliderProps {
   featuredImages?: Record<string, string> | null;
 }
+
+const featuredToCategory: Record<string, string> = {
+  'corte-styling': 'corte',
+  'coloracion': 'color',
+  'tratamientos': 'tratamientos',
+  'peinados': 'peinados',
+};
 
 export function FeaturedServicesSlider({ featuredImages }: FeaturedServicesSliderProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -54,7 +61,7 @@ export function FeaturedServicesSlider({ featuredImages }: FeaturedServicesSlide
             {featuredServices.map((service) => (
               <a
                 key={service.id}
-                href={`/servicios#${service.id}`}
+                href={`/servicios#${featuredToCategory[service.id] || ''}`}
                 className="group block relative min-w-[350px] h-[450px] rounded-xl overflow-hidden flex-shrink-0"
               >
                 <div

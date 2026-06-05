@@ -5,13 +5,13 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GalleryImage } from '@/types/gallery';
 import { Expand } from 'lucide-react';
 
-const fallbackImages: GalleryImage[] = [
+const placeholderImages: GalleryImage[] = [
   { id: '1', url: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop', alt: 'Transformación 1' },
   { id: '2', url: 'https://images.unsplash.com/photo-1605497788044-5f8e8e692758?w=600&auto=format&fit=crop', alt: 'Transformación 2' },
   { id: '3', url: 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&auto=format&fit=crop', alt: 'Transformación 3' },
   { id: '4', url: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&auto=format&fit=crop', alt: 'Transformación 4' },
   { id: '5', url: 'https://images.unsplash.com/photo-1527799820374-d8221b2e6246?w=600&auto=format&fit=crop', alt: 'Transformación 5' },
-  { id: '6', url: 'https://images.unsplash.com/photo-1593702288056-7927wdf047a?w=600&auto=format&fit=crop', alt: 'Transformación 6' },
+  { id: '6', url: 'https://images.unsplash.com/photo-1593702288056-7927sdf047a?w=600&auto=format&fit=crop', alt: 'Transformación 6' },
   { id: '7', url: 'https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&auto=format&fit=crop', alt: 'Transformación 7' },
 ];
 
@@ -23,7 +23,8 @@ const SPEED = 80;
 
 export function StaticGallery({ images }: StaticGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
-  const displayImages = images && images.length > 0 ? images : fallbackImages;
+
+  const displayImages = images && images.length > 0 ? images : placeholderImages;
 
   const duplicatedImages = useMemo(
     () => [...displayImages, ...displayImages],
@@ -117,7 +118,7 @@ export function StaticGallery({ images }: StaticGalleryProps) {
           {duplicatedImages.map((image, index) => (
             <div
               key={`${image.id}-${index}`}
-                className="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2"
+              className="flex-shrink-0 w-full md:w-1/2 lg:w-1/4 p-2"
             >
               <button
                 onClick={() => { if (!wasDrag()) setSelectedImage(image); }}
