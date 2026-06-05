@@ -6,7 +6,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Servicios",
-  description: "Descubrí nuestra amplia gama de servicios profesionales de peluquería. Cortes, coloración, tratamientos y más.",
+  description: "Descubre nuestra amplia gama de servicios profesionales de peluquería. Cortes, coloración, tratamientos y más.",
 };
 
 async function fetchServices(): Promise<ServiceCategory[]> {

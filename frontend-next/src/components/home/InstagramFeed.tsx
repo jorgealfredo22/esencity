@@ -16,7 +16,7 @@ export function InstagramFeed() {
   const [posts, setPosts] = useState<InstagramPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const username = process.env.NEXT_PUBLIC_INSTAGRAM_USERNAME || 'goldenprizebarbershop';
+  const username = process.env.NEXT_PUBLIC_INSTAGRAM_USERNAME || 'esencity';
 
   useEffect(() => {
     async function fetchPosts() {
