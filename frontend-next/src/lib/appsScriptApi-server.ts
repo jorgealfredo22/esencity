@@ -6,7 +6,7 @@ export async function getServices() {
   }
 
   const url = `${APPS_SCRIPT_URL}?action=getServices`;
-  const res = await fetch(url);
+  const res = await fetch(url, { next: { revalidate: 3600 } });
   return res.json();
 }
 
