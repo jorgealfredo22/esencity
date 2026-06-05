@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useCallback, useSyncExternalStore } from 'react';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ServiceCard } from './ServiceCard';
@@ -11,22 +11,30 @@ interface ServicesGridProps {
   initialServices: ServiceCategory[];
 }
 
-export function ServicesGrid({ initialServices }: ServicesGridProps) {
-  const [activeCategory, setActiveCategory] = useState<string>(initialServices[0]?.id || '');
-  const servicesRef = useRef(initialServices);
-  servicesRef.current = initialServices;
-
-  useEffect(() => {
-    const applyHash = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash && servicesRef.current.some(cat => cat.id === hash)) {
-        setActiveCategory(hash);
-      }
-    };
-    applyHash();
-    window.addEventListener('hashchange', applyHash);
-    return () => window.removeEventListener('hashchange', applyHash);
+function useHash(): string {
+  const subscribe = useCallback((callback: () => void) => {
+    window.addEventListener('hashchange', callback);
+    return () => window.removeEventListener('hashchange', callback);
   }, []);
+
+  const getSnapshot = useCallback(() => {
+    return window.location.hash.replace('#', '');
+  }, []);
+
+  const getServerSnapshot = useCallback(() => '', []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
+
+export function ServicesGrid({ initialServices }: ServicesGridProps) {
+  const hash = useHash();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const activeCategory = selectedCategory ?? (
+    hash && initialServices.some(cat => cat.id === hash)
+      ? hash
+      : initialServices[0]?.id || ''
+  );
 
   const activeServices = initialServices.find(cat => cat.id === activeCategory)?.services || [];
 
@@ -42,7 +50,7 @@ export function ServicesGrid({ initialServices }: ServicesGridProps) {
           {initialServices.map((category) => (
             <button
               key={category.id}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => setSelectedCategory(category.id)}
               className={cn(
                 'px-5 py-2 rounded-full text-xs font-medium tracking-wider uppercase transition-colors',
                 activeCategory === category.id
