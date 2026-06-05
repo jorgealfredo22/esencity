@@ -22,21 +22,27 @@ export default async function Home() {
     const response = await getServices();
     if (response.status === "success" && Array.isArray(response.data)) {
       const categoryImages: Record<string, string> = {};
-      const categoryMap: Record<string, string> = {
-        corte: "cortes",
-        tratamientos: "facial",
-        peinados: "cabello",
+      const serviceToFeat: Record<string, string> = {
+        'corte-hombre': 'cortes',
+        'corte-mujer': 'cortes',
+        'corte-nino': 'cortes',
+        'hidratacion': 'facial',
+        'keratina': 'facial',
+        'botox-capilar': 'facial',
+        'reconstruccion': 'facial',
+        'brushing': 'cabello',
+        'peinado-novia': 'cabello',
+        'peinado-fiesta': 'cabello',
+        'alaciado': 'cabello',
       };
       for (const category of response.data) {
-        const featId = categoryMap[category.id];
-        if (!featId) continue;
         for (const s of category.services) {
-          if (s.image) {
+          const featId = serviceToFeat[s.id];
+          if (featId && s.image && !categoryImages[featId]) {
             categoryImages[featId] = s.image.replace(
-                /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w\d+/,
-                "/api/apps-script/image?id=$1&sz=w1200"
-              );
-            break;
+              /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w\d+/,
+              "/api/apps-script/image?id=$1&sz=w1200"
+            );
           }
         }
       }

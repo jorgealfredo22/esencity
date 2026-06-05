@@ -17,13 +17,6 @@ interface FeaturedServicesSliderProps {
   featuredImages?: Record<string, string> | null;
 }
 
-const featuredToCategory: Record<string, string> = {
-  'cortes': 'corte',
-  'barba': 'corte',
-  'facial': 'tratamientos',
-  'cabello': 'peinados',
-};
-
 export function FeaturedServicesSlider({ featuredImages }: FeaturedServicesSliderProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const images = { ...fallbackImages, ...featuredImages };
@@ -61,7 +54,7 @@ export function FeaturedServicesSlider({ featuredImages }: FeaturedServicesSlide
             {featuredServices.map((service) => (
               <a
                 key={service.id}
-                href={`/servicios#${featuredToCategory[service.id] || ''}`}
+                href={`/servicios#${service.id}`}
                 className="group block relative min-w-[350px] h-[450px] rounded-xl overflow-hidden flex-shrink-0"
               >
                 <div
