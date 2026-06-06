@@ -7,7 +7,7 @@ const mapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(address)}&t=
 
 export function LocationSection() {
   return (
-    <section id="ubicacion" className="section-padding bg-surface-alt">
+    <section id="ubicacion" className="section-padding bg-surface-alt text-text">
       <div className="container-custom">
         <SectionHeading
           title="Encuéntranos"

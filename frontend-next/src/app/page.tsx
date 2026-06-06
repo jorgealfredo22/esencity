@@ -11,7 +11,7 @@ import { GalleryImage } from "@/types/gallery";
 function proxyDriveUrl(url: string, size = "w1000"): string {
   return url.replace(
     /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w\d+/,
-    `/api/apps-script/image?id=$1&sz=${size}`
+    `https://drive.google.com/thumbnail?id=$1&sz=${size}`
   );
 }
 
