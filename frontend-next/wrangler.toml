@@ -1,3 +1,14 @@
 name = "esencity"
+main = ".vercel/output/static/_worker.js/index.js"
 compatibility_date = "2025-06-01"
 compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+
+kv_namespaces = [
+  { binding = "NEXT_CACHE_WORKERS_KV", id = "675acaa4bc4e4172a853f50792dcee92" }
+]
+
+[assets]
+directory = "/tmp/esencity-assets"
