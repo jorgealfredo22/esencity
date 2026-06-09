@@ -4,7 +4,6 @@ import { FeaturedServicesSlider } from "@/components/home/FeaturedServicesSlider
 import { StaticGallery } from "@/components/home/StaticGallery";
 import { InstagramFeed } from "@/components/home/InstagramFeed";
 import { ContactSection } from "@/components/home/ContactSection";
-import { LocationSection } from "@/components/home/LocationSection";
 import { getServices, getGallery } from "@/lib/appsScriptApi-server";
 import { GalleryImage } from "@/types/gallery";
 
@@ -64,7 +63,6 @@ export default async function Home() {
       <FeaturedServicesSlider featuredImages={featuredImages} />
       <StaticGallery images={galleryImages} />
       <InstagramFeed />
-      <LocationSection />
       <ContactSection />
     </>
   );
