@@ -39,8 +39,16 @@ export function Hero() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          La belleza elevada a arte.
+          Esencity — Barbería y Salón de Belleza en Sogamoso
         </h1>
+
+        <p
+          className={`text-lg md:text-xl text-text-inverse opacity-80 max-w-2xl mx-auto mb-4 font-light leading-relaxed transition-all duration-700 delay-300 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}
+        >
+          La belleza elevada a arte.
+        </p>
 
         <p
           className={`text-lg md:text-xl text-text-inverse opacity-80 max-w-2xl mx-auto mb-10 font-light leading-relaxed transition-all duration-700 delay-300 ${

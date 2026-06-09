@@ -27,9 +27,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           <div className="lg:col-span-1">
             <BrandLogo className="h-10 mb-5" />
-            <p className="text-text-inverse-secondary/60 text-sm leading-relaxed mb-6">
-              La belleza, en manos expertas, se convierte en arte. Más de 20 años creando experiencias únicas.
-            </p>
+              <p className="text-text-inverse-secondary/60 text-sm leading-relaxed mb-6">
+                Tu barbería de confianza en Sogamoso, Boyacá. Más de 10 años creando experiencias únicas.
+              </p>
             <div className="flex gap-3">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Hero } from "@/components/home/Hero";
 import { About } from "@/components/home/About";
 import { FeaturedServicesSlider } from "@/components/home/FeaturedServicesSlider";
@@ -6,6 +7,12 @@ import { InstagramFeed } from "@/components/home/InstagramFeed";
 import { ContactSection } from "@/components/home/ContactSection";
 import { getServices, getGallery } from "@/lib/appsScriptApi-server";
 import { GalleryImage } from "@/types/gallery";
+
+export const metadata: Metadata = {
+  title: 'Esencity — Barbería en Sogamoso | Cortes, Barba y Color',
+  description: 'Barbería y salón de belleza en Sogamoso, Boyacá. Cortes, diseño de barba, coloración y tratamientos capilares en Esencity. Más de 10 años de experiencia. Agenda tu cita.',
+  alternates: { canonical: 'https://esencity.com' },
+}
 
 function proxyDriveUrl(url: string, size = "w1000"): string {
   return url.replace(
@@ -64,6 +71,37 @@ export default async function Home() {
       <StaticGallery images={galleryImages} />
       <InstagramFeed />
       <ContactSection />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Dónde queda la barbería Esencity en Sogamoso?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Esencity está ubicada en Cra. 12 #11-43, Sogamoso, Boyacá, Colombia." }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cuáles son los horarios de Esencity?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Lunes a viernes de 10:00 a 20:00 y sábados de 9:00 a 18:00." }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Cuánto cuesta un corte en Esencity?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Los cortes en Esencity tienen precios desde $2.000 COP. Consulta todos nuestros servicios y precios en nuestra página de servicios." }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Es necesario agendar cita en Esencity?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Recomendamos agendar cita para garantizar tu espacio. Puedes reservar a través de nuestra página web o contactarnos directamente." }
+              }
+            ]
+          })
+        }}
+      />
     </>
   );
 }

@@ -6,6 +6,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Política de Privacidad",
   description: "Política de Privacidad de ESENCITY. Conocé cómo tratamos y protegemos tus datos personales.",
+  alternates: { canonical: 'https://esencity.com/privacidad' },
 };
 
 export default function PrivacidadPage() {

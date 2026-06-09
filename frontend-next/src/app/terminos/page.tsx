@@ -6,6 +6,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Términos y Condiciones",
   description: "Términos y Condiciones de ESENCITY. Condiciones generales para el uso de nuestros servicios y sitio web.",
+  alternates: { canonical: 'https://esencity.com/terminos' },
 };
 
 export default function TerminosPage() {
@@ -84,7 +85,7 @@ export default function TerminosPage() {
             4. Precios y Pagos
           </h2>
           <p>
-            Todos los precios de nuestros servicios están expresados en pesos argentinos (ARS) e incluyen
+            Todos los precios de nuestros servicios están expresados en pesos colombianos (COP) e incluyen
             los impuestos aplicables, salvo indicación en contrario. Los precios publicados en el Sitio son
             de referencia y pueden variar según las características específicas del servicio solicitado.
           </p>

@@ -25,9 +25,12 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: 'https://esencity.com',
+  },
   openGraph: {
     type: "website",
-    locale: "es_AR",
+    locale: "es_CO",
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
@@ -53,11 +56,58 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="es-CO" className={`${playfair.variable} ${inter.variable}`}>
       <body className={`${inter.className} antialiased`}>
         <Header />
         <main>{children}</main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BarberShop",
+              name: "Esencity",
+              description: "Barbería y salón de belleza en Sogamoso, Boyacá, Colombia",
+              url: "https://esencity.com",
+              telephone: "+573204761569",
+              email: "esencitybarber@gmail.com",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Cra. 12 #11-43",
+                addressLocality: "Sogamoso",
+                addressRegion: "Boyacá",
+                addressCountry: "CO",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 5.7155527,
+                longitude: -72.9291762,
+              },
+              openingHoursSpecification: [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                  opens: "10:00",
+                  closes: "20:00",
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: "Saturday",
+                  opens: "09:00",
+                  closes: "18:00",
+                },
+              ],
+              priceRange: "$$",
+              sameAs: [
+                "https://www.instagram.com/esenc.ity",
+                "https://www.facebook.com/share/18zJVW1cvv/",
+                "https://www.tiktok.com/@esencity_barberia",
+              ],
+              image: "https://esencity.com/og-image.jpg",
+            }),
+          }}
+        />
       </body>
     </html>
   );

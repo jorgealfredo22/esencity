@@ -4,15 +4,16 @@ import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GalleryImage } from '@/types/gallery';
 import { Expand } from 'lucide-react';
+import Image from 'next/image';
 
 const placeholderImages: GalleryImage[] = [
-  { id: '1', url: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop', alt: 'Transformación 1' },
-  { id: '2', url: 'https://images.unsplash.com/photo-1605497788044-5f8e8e692758?w=600&auto=format&fit=crop', alt: 'Transformación 2' },
-  { id: '3', url: 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&auto=format&fit=crop', alt: 'Transformación 3' },
-  { id: '4', url: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&auto=format&fit=crop', alt: 'Transformación 4' },
-  { id: '5', url: 'https://images.unsplash.com/photo-1527799820374-d8221b2e6246?w=600&auto=format&fit=crop', alt: 'Transformación 5' },
-  { id: '6', url: 'https://images.unsplash.com/photo-1593702288056-7927sdf047a?w=600&auto=format&fit=crop', alt: 'Transformación 6' },
-  { id: '7', url: 'https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&auto=format&fit=crop', alt: 'Transformación 7' },
+  { id: '1', url: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop', alt: 'Corte de cabello moderno en Esencity barbería Sogamoso' },
+  { id: '2', url: 'https://images.unsplash.com/photo-1605497788044-5f8e8e692758?w=600&auto=format&fit=crop', alt: 'Diseño de barba profesional en Esencity' },
+  { id: '3', url: 'https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=600&auto=format&fit=crop', alt: 'Coloración capilar en barbería Sogamoso' },
+  { id: '4', url: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&auto=format&fit=crop', alt: 'Tratamiento capilar premium Esencity' },
+  { id: '5', url: 'https://images.unsplash.com/photo-1527799820374-d8221b2e6246?w=600&auto=format&fit=crop', alt: 'Estilismo masculino en barbería Sogamoso' },
+  { id: '6', url: 'https://images.unsplash.com/photo-1593702288056-7927sdf047a?w=600&auto=format&fit=crop', alt: 'Transformación de look en Esencity barbería' },
+  { id: '7', url: 'https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&auto=format&fit=crop', alt: 'Corte de cabello moderno en Esencity barbería Sogamoso' },
 ];
 
 interface StaticGalleryProps {
@@ -124,9 +125,11 @@ export function StaticGallery({ images }: StaticGalleryProps) {
                 onClick={() => { if (!wasDrag()) setSelectedImage(image); }}
                 className="relative aspect-square w-full rounded-xl overflow-hidden group cursor-pointer transition-all duration-500 shadow-sm hover:shadow-xl border border-border/50 hover:border-secondary/30"
               >
-                <img
+                <Image
                   src={image.url}
                   alt={image.alt}
+                  width={600}
+                  height={600}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 pointer-events-none"
                   draggable={false}
                 />
@@ -146,9 +149,11 @@ export function StaticGallery({ images }: StaticGalleryProps) {
           onClick={() => setSelectedImage(null)}
         >
           <div className="relative max-w-3xl max-h-[85vh] w-full flex items-center justify-center">
-            <img
+            <Image
               src={selectedImage.url}
               alt={selectedImage.alt}
+              width={1200}
+              height={800}
               className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
             />
           </div>

@@ -42,6 +42,7 @@ export function About() {
           description={
             <>
               Más de 10 años perfeccionando el arte del color, el corte y la transformación capilar.
+              Somos la barbería de referencia en Sogamoso, Boyacá.
               En <strong className="text-text font-semibold">Esencity</strong>, cada servicio es un ritual de belleza diseñado para resaltar tu esencia.
             </>
           }
