@@ -3,6 +3,8 @@ import { ServicesGrid } from "@/components/servicios/ServicesGrid";
 import { servicesData } from "@/data/services";
 import { ServiceCategory } from "@/types/service";
 import { Metadata } from "next";
+import { getServices } from "@/lib/appsScriptServer";
+import { proxyDriveUrl } from "@/lib/url";
 
 export const metadata: Metadata = {
   title: 'Servicios de Barbería en Sogamoso | Esencity',
@@ -10,27 +12,23 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://esencity.com/servicios' },
 };
 
-async function fetchServices(): Promise<ServiceCategory[]> {
+export default async function ServiciosPage() {
+  let services: ServiceCategory[] = servicesData;
+
   try {
-    const url = `${process.env.NEXT_PUBLIC_APPS_SCRIPT_URL}?action=getServices`;
-    const res = await fetch(url, {
-      next: { revalidate: 3600 },
-    });
-    const data = await res.json();
-    if (data.status === "success" && Array.isArray(data.data)) {
-      return data.data.map((cat: ServiceCategory) => ({
+    const response = await getServices();
+    if (response.status === "success" && Array.isArray(response.data)) {
+      services = response.data.map((cat: ServiceCategory) => ({
         ...cat,
         services: cat.services.map((s) => ({
           ...s,
+          image: s.image ? proxyDriveUrl(s.image, "w1200") : undefined,
         })),
       }));
     }
-  } catch {}
-  return servicesData;
-}
-
-export default async function ServiciosPage() {
-  const services = await fetchServices();
+  } catch (err) {
+    console.error('[Servicios] Error fetching services, using fallback:', err);
+  }
 
   return (
     <>

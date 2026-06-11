@@ -5,20 +5,14 @@ import { FeaturedServicesSlider } from "@/components/home/FeaturedServicesSlider
 import { StaticGallery } from "@/components/home/StaticGallery";
 import { InstagramFeed } from "@/components/home/InstagramFeed";
 import { ContactSection } from "@/components/home/ContactSection";
-import { getServices, getGallery } from "@/lib/appsScriptApi-server";
+import { getServices, getGallery } from "@/lib/appsScriptServer";
 import { GalleryImage } from "@/types/gallery";
+import { proxyDriveUrl } from "@/lib/url";
 
 export const metadata: Metadata = {
   title: 'Esencity — Barbería en Sogamoso | Cortes, Barba y Color',
   description: 'Barbería y salón de belleza en Sogamoso, Boyacá. Cortes, diseño de barba, coloración y tratamientos capilares en Esencity. Más de 10 años de experiencia. Agenda tu cita.',
   alternates: { canonical: 'https://esencity.com' },
-}
-
-function proxyDriveUrl(url: string, size = "w1000"): string {
-  return url.replace(
-    /https:\/\/drive\.google\.com\/thumbnail\?id=([^&]+)&sz=w\d+/,
-    `https://drive.google.com/thumbnail?id=$1&sz=${size}`
-  );
 }
 
 export default async function Home() {
@@ -47,7 +41,9 @@ export default async function Home() {
       }
       featuredImages = categoryImages;
     }
-  } catch {}
+  } catch (err) {
+    console.error('[Home] Error fetching services, using fallback:', err);
+  }
 
   try {
     const galleryResponse = await getGallery();
@@ -61,7 +57,9 @@ export default async function Home() {
         })
       );
     }
-  } catch {}
+  } catch (err) {
+    console.error('[Home] Error fetching gallery, using fallback:', err);
+  }
 
   return (
     <>

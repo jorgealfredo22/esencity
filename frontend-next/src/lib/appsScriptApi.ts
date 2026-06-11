@@ -1,11 +1,7 @@
-const APPS_SCRIPT_URL = process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || '';
-
-function isConfigured() {
-  return APPS_SCRIPT_URL.length > 0 && !APPS_SCRIPT_URL.includes('YOUR_SCRIPT_ID');
-}
+import { isAppsScriptConfigured } from '@/lib/appsScriptConfig';
 
 export async function fetchFromAppsScript(endpoint: string, params?: Record<string, string>) {
-  if (!isConfigured()) {
+  if (!isAppsScriptConfigured()) {
     throw new Error('Apps Script URL no configurada');
   }
 
@@ -18,51 +14,34 @@ export async function fetchFromAppsScript(endpoint: string, params?: Record<stri
     });
   }
 
-  try {
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+  const response = await fetch(url.toString(), {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching from Apps Script:', error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  return response.json();
 }
 
 export async function postToAppsScript(endpoint: string, data: Record<string, unknown>) {
-  if (!isConfigured()) {
+  if (!isAppsScriptConfigured()) {
     throw new Error('Apps Script URL no configurada');
   }
 
-  try {
-    const response = await fetch('/api/apps-script', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        action: endpoint,
-        ...data,
-      }),
-    });
+  const response = await fetch('/api/apps-script', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: endpoint, ...data }),
+  });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error posting to Apps Script:', error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  return response.json();
 }
 
 export async function getServices() {
