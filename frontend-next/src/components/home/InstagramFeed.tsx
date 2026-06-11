@@ -8,8 +8,8 @@ import { Loader } from '@/components/shared/Loader';
 import { ErrorState } from '@/components/shared/ErrorState';
 import { InstagramIcon } from '@/components/shared/SocialIcons';
 import { InstagramPost } from '@/types/instagram';
-import { getInstagramFeed } from '@/lib/appsScriptApi';
 import { mapInstagramResponse, getInstagramProfileUrl } from '@/lib/instagramMapper';
+import { getAppsScriptUrl } from '@/lib/appsScriptConfig';
 import { Camera } from 'lucide-react';
 
 export function InstagramFeed() {
@@ -19,20 +19,29 @@ export function InstagramFeed() {
   const username = process.env.NEXT_PUBLIC_INSTAGRAM_USERNAME || 'esencity';
 
   useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const data = await getInstagramFeed();
-        const mappedPosts = mapInstagramResponse(data);
-        setPosts(mappedPosts.slice(0, 8));
-      } catch (err) {
-        setError('No se pudo cargar el feed de Instagram');
-        console.error('Error fetching Instagram feed:', err);
-      } finally {
-        setLoading(false);
-      }
+    const appsScriptUrl = getAppsScriptUrl();
+    if (!appsScriptUrl) {
+      setError('No se pudo cargar el feed de Instagram');
+      setLoading(false);
+      return;
     }
 
-    fetchPosts();
+    fetch(`${appsScriptUrl}?action=getInstagramFeed`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'success' && data.data) {
+          const mappedPosts = mapInstagramResponse(data);
+          setPosts(mappedPosts.slice(0, 8));
+        } else {
+          setError('No se pudo cargar el feed de Instagram');
+        }
+      })
+      .catch(() => {
+        setError('No se pudo cargar el feed de Instagram');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   return (

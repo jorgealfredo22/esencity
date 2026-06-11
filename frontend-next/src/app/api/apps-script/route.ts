@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAppsScriptUrl } from '@/lib/appsScriptConfig';
 
 export const runtime = 'edge';
+
+const APPS_SCRIPT_URL = process.env.APPS_SCRIPT_URL || process.env.NEXT_PUBLIC_APPS_SCRIPT_URL || '';
 
 const ALLOWED_ACTIONS = new Set([
   'getServices',
@@ -9,23 +10,6 @@ const ALLOWED_ACTIONS = new Set([
   'getInstagramFeed',
   'submitContact',
 ]);
-
-function errorResponse(message: string) {
-  return NextResponse.json(
-    { status: 'error', message },
-    { status: 500 }
-  );
-}
-
-async function proxyToAppsScript(url: string, options: RequestInit) {
-  const response = await fetch(url, options);
-
-  if (!response.ok) {
-    throw new Error(`Apps Script error: ${response.status}`);
-  }
-
-  return response.json();
-}
 
 export async function GET(request: NextRequest) {
   try {
@@ -39,20 +23,43 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const url = new URL(getAppsScriptUrl());
+    if (!APPS_SCRIPT_URL) {
+      console.error('[API Proxy] APPS_SCRIPT_URL is not configured');
+      return NextResponse.json(
+        { status: 'error', message: 'Backend URL not configured' },
+        { status: 500 }
+      );
+    }
+
+    const url = new URL(APPS_SCRIPT_URL);
     url.searchParams.set('action', action);
     searchParams.forEach((value, key) => {
       if (key !== 'action') url.searchParams.set(key, value);
     });
 
-    const data = await proxyToAppsScript(url.toString(), {
+    console.log('[API Proxy] Fetching:', url.toString());
+
+    const response = await fetch(url.toString(), {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
 
+    if (!response.ok) {
+      console.error('[API Proxy] Apps Script returned:', response.status, response.statusText);
+      return NextResponse.json(
+        { status: 'error', message: `Backend error: ${response.status}` },
+        { status: response.status }
+      );
+    }
+
+    const data = await response.json();
     return NextResponse.json(data);
-  } catch {
-    return errorResponse('Error al conectar con el backend');
+  } catch (err) {
+    console.error('[API Proxy] Unexpected error:', err);
+    return NextResponse.json(
+      { status: 'error', message: 'Error al conectar con el backend' },
+      { status: 500 }
+    );
   }
 }
 
@@ -67,15 +74,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const data = await proxyToAppsScript(getAppsScriptUrl(), {
+    if (!APPS_SCRIPT_URL) {
+      console.error('[API Proxy] APPS_SCRIPT_URL is not configured');
+      return NextResponse.json(
+        { status: 'error', message: 'Backend URL not configured' },
+        { status: 500 }
+      );
+    }
+
+    console.log('[API Proxy] POST to:', APPS_SCRIPT_URL);
+
+    const response = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
 
+    if (!response.ok) {
+      console.error('[API Proxy] Apps Script returned:', response.status, response.statusText);
+      return NextResponse.json(
+        { status: 'error', message: `Backend error: ${response.status}` },
+        { status: response.status }
+      );
+    }
+
+    const data = await response.json();
     return NextResponse.json(data);
-  } catch {
-    return errorResponse('Error al conectar con el backend');
+  } catch (err) {
+    console.error('[API Proxy] Unexpected error:', err);
+    return NextResponse.json(
+      { status: 'error', message: 'Error al conectar con el backend' },
+      { status: 500 }
+    );
   }
 }
 
