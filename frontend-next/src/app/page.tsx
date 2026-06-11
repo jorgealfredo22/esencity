@@ -7,7 +7,6 @@ import { InstagramFeed } from "@/components/home/InstagramFeed";
 import { ContactSection } from "@/components/home/ContactSection";
 import { getServices, getGallery } from "@/lib/appsScriptServer";
 import { GalleryImage } from "@/types/gallery";
-import { proxyDriveUrl } from "@/lib/url";
 
 export const metadata: Metadata = {
   title: 'Esencity — Barbería en Sogamoso | Cortes, Barba y Color',
@@ -34,7 +33,7 @@ export default async function Home() {
         if (!featId) continue;
         for (const s of category.services) {
           if (s.image) {
-            categoryImages[featId] = proxyDriveUrl(s.image, "w1200");
+            categoryImages[featId] = s.image;
             break;
           }
         }
@@ -42,23 +41,23 @@ export default async function Home() {
       featuredImages = categoryImages;
     }
   } catch (err) {
-    console.error('[Home] Error fetching services, using fallback:', err);
+    console.error('[Home] Error fetching services:', err);
   }
 
   try {
     const galleryResponse = await getGallery();
     if (galleryResponse.status === "success" && galleryResponse.data?.images) {
       galleryImages = galleryResponse.data.images.map(
-        (img: { id: string; name: string; url: string }) => ({
+        (img: { id: string; name: string; url: string; thumbnailUrl?: string }) => ({
           id: img.id,
-          url: proxyDriveUrl(img.url, "w1000"),
-          thumbnailUrl: proxyDriveUrl(img.url, "w400"),
+          url: img.url,
+          thumbnailUrl: img.thumbnailUrl || img.url,
           alt: img.name.replace(/\.[^.]+$/, ""),
         })
       );
     }
   } catch (err) {
-    console.error('[Home] Error fetching gallery, using fallback:', err);
+    console.error('[Home] Error fetching gallery:', err);
   }
 
   return (

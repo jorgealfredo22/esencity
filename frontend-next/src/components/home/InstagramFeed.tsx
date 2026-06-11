@@ -11,7 +11,6 @@ import { InstagramPost } from '@/types/instagram';
 import { getInstagramFeed } from '@/lib/appsScriptApi';
 import { mapInstagramResponse, getInstagramProfileUrl } from '@/lib/instagramMapper';
 import { Camera } from 'lucide-react';
-import Image from 'next/image';
 
 export function InstagramFeed() {
   const [posts, setPosts] = useState<InstagramPost[]>([]);
@@ -88,11 +87,9 @@ export function InstagramFeed() {
                   rel="noopener noreferrer"
                   className="relative aspect-square rounded-lg overflow-hidden group"
                 >
-                  <Image
+                  <img
                     src={post.mediaUrl}
-                    alt={post.caption || 'Publicación de Instagram de Esencity barbería Sogamoso'}
-                    width={400}
-                    height={400}
+                    alt={post.caption ? post.caption.substring(0, 50) : 'Instagram post'}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-secondary/0 group-hover:bg-secondary/40 transition-colors flex items-center justify-center">

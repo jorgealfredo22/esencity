@@ -4,7 +4,6 @@ import { servicesData } from "@/data/services";
 import { ServiceCategory } from "@/types/service";
 import { Metadata } from "next";
 import { getServices } from "@/lib/appsScriptServer";
-import { proxyDriveUrl } from "@/lib/url";
 
 export const metadata: Metadata = {
   title: 'Servicios de Barbería en Sogamoso | Esencity',
@@ -18,13 +17,7 @@ export default async function ServiciosPage() {
   try {
     const response = await getServices();
     if (response.status === "success" && Array.isArray(response.data)) {
-      services = response.data.map((cat: ServiceCategory) => ({
-        ...cat,
-        services: cat.services.map((s) => ({
-          ...s,
-          image: s.image ? proxyDriveUrl(s.image, "w1200") : undefined,
-        })),
-      }));
+      services = response.data;
     }
   } catch (err) {
     console.error('[Servicios] Error fetching services, using fallback:', err);

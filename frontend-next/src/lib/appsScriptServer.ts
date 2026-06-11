@@ -1,4 +1,5 @@
 import { getAppsScriptUrl, isAppsScriptConfigured } from './appsScriptConfig';
+import { proxyDriveUrl } from './url';
 
 async function fetchFromAppsScriptServer(endpoint: string) {
   if (!isAppsScriptConfigured()) {
@@ -16,11 +17,42 @@ async function fetchFromAppsScriptServer(endpoint: string) {
 }
 
 export async function getServices() {
-  return fetchFromAppsScriptServer('getServices');
+  const response = await fetchFromAppsScriptServer('getServices');
+
+  if (response.status === 'success' && Array.isArray(response.data)) {
+    return {
+      ...response,
+      data: response.data.map((cat: any) => ({
+        ...cat,
+        services: cat.services.map((s: any) => ({
+          ...s,
+          image: s.image ? proxyDriveUrl(s.image, 'w1200') : undefined,
+        })),
+      })),
+    };
+  }
+
+  return response;
 }
 
 export async function getGallery() {
-  return fetchFromAppsScriptServer('getGallery');
+  const response = await fetchFromAppsScriptServer('getGallery');
+
+  if (response.status === 'success' && response.data?.images) {
+    return {
+      ...response,
+      data: {
+        ...response.data,
+        images: response.data.images.map((img: any) => ({
+          ...img,
+          url: proxyDriveUrl(img.url, 'w1000'),
+          thumbnailUrl: proxyDriveUrl(img.url, 'w400'),
+        })),
+      },
+    };
+  }
+
+  return response;
 }
 
 export async function getInstagramFeed() {

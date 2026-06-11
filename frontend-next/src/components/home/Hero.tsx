@@ -40,17 +40,8 @@ export function Hero() {
           }`}
           style={{ fontSize: 'clamp(1.5rem, 5vw, 3.75rem)', lineHeight: '1.2' }}
         >
-          Esencity — Barbería y Salón de Belleza en Sogamoso
-        </h1>
-
-        <p
-          className={`text-text-inverse opacity-80 max-w-2xl mx-auto mb-4 font-light leading-relaxed transition-all duration-700 delay-300 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-          style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}
-        >
           La belleza elevada a arte.
-        </p>
+        </h1>
 
         <p
           className={`text-text-inverse opacity-80 max-w-2xl mx-auto mb-10 font-light leading-relaxed transition-all duration-700 delay-300 ${
