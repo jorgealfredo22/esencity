@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useCallback, useSyncExternalStore } from 'react';
+import { useState, useCallback, useSyncExternalStore, useEffect } from 'react';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ServiceCard } from './ServiceCard';
 import { cn } from '@/lib/utils';
 import { ServiceCategory } from '@/types/service';
+import { getAppsScriptUrl } from '@/lib/appsScriptConfig';
+import { directDriveUrl } from '@/lib/url';
 
 interface ServicesGridProps {
   initialServices: ServiceCategory[];
@@ -29,14 +31,40 @@ function useHash(): string {
 export function ServicesGrid({ initialServices }: ServicesGridProps) {
   const hash = useHash();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [clientServices, setClientServices] = useState<ServiceCategory[] | null>(null);
+
+  useEffect(() => {
+    const appsScriptUrl = getAppsScriptUrl();
+    if (!appsScriptUrl) return;
+
+    fetch(`${appsScriptUrl}?action=getServices`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'success' && Array.isArray(data.data)) {
+          const cacheBuster = data.timestamp || Date.now();
+          setClientServices(
+            data.data.map((cat: any) => ({
+              ...cat,
+              services: cat.services.map((s: any) => ({
+                ...s,
+                image: s.image ? directDriveUrl(s.image, cacheBuster) : null,
+              })),
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const services = clientServices || initialServices;
 
   const activeCategory = selectedCategory ?? (
-    hash && initialServices.some(cat => cat.id === hash)
+    hash && services.some(cat => cat.id === hash)
       ? hash
-      : initialServices[0]?.id || ''
+      : services[0]?.id || ''
   );
 
-  const activeServices = initialServices.find(cat => cat.id === activeCategory)?.services || [];
+  const activeServices = services.find(cat => cat.id === activeCategory)?.services || [];
 
   return (
     <section className="section-padding bg-surface">
@@ -47,7 +75,7 @@ export function ServicesGrid({ initialServices }: ServicesGridProps) {
         />
 
         <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {initialServices.map((category) => (
+          {services.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}

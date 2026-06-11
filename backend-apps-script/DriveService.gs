@@ -21,6 +21,7 @@ function getGallery() {
           mimeType: mimeType,
           url: 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1000',
           thumbnailUrl: 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w400',
+          lastUpdated: file.getLastUpdated().getTime(),
           width: 1000,
           height: 1000
         });

@@ -11,4 +11,4 @@ kv_namespaces = [
 ]
 
 [assets]
-directory = "/tmp/esencity-assets"
+directory = ".vercel/output/static"

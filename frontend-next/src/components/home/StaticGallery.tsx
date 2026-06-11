@@ -4,6 +4,8 @@ import { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GalleryImage } from '@/types/gallery';
 import { Expand } from 'lucide-react';
+import { getAppsScriptUrl } from '@/lib/appsScriptConfig';
+import { directDriveUrl } from '@/lib/url';
 
 const placeholderImages: GalleryImage[] = [
   { id: '1', url: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop', alt: 'Transformación 1' },
@@ -23,8 +25,35 @@ const SPEED = 80;
 
 export function StaticGallery({ images }: StaticGalleryProps) {
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [clientImages, setClientImages] = useState<GalleryImage[] | null>(null);
 
-  const displayImages = images && images.length > 0 ? images : placeholderImages;
+  useEffect(() => {
+    const appsScriptUrl = getAppsScriptUrl();
+    if (!appsScriptUrl) return;
+
+    fetch(`${appsScriptUrl}?action=getGallery`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'success' && data.data?.images) {
+          const cacheBuster = data.timestamp || Date.now();
+          setClientImages(
+            data.data.images.map((img: any) => ({
+              id: img.id,
+              url: directDriveUrl(img.url, cacheBuster),
+              thumbnailUrl: directDriveUrl(img.thumbnailUrl || img.url, cacheBuster),
+              alt: (img.name || '').replace(/\.[^.]+$/, ''),
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const displayImages = clientImages && clientImages.length > 0
+    ? clientImages
+    : images && images.length > 0
+      ? images
+      : placeholderImages;
 
   const duplicatedImages = useMemo(
     () => [...displayImages, ...displayImages],

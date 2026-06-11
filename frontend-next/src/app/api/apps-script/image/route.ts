@@ -25,10 +25,10 @@ export async function GET(request: NextRequest) {
     return new NextResponse(buffer, {
       headers: {
         'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=3600, must-revalidate',
+        'Cache-Control': 'public, max-age=300, must-revalidate',
       },
     });
-  } catch {
-    return new NextResponse('Error fetching image', { status: 500 });
+  } catch (e) {
+    return new NextResponse('Error fetching image: ' + String(e), { status: 500 });
   }
 }

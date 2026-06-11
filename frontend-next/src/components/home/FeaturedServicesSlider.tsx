@@ -1,10 +1,12 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { featuredServices } from '@/data/featuredServices';
 import { Button } from '@/components/ui/Button';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getAppsScriptUrl } from '@/lib/appsScriptConfig';
+import { directDriveUrl } from '@/lib/url';
 
 const fallbackImages: Record<string, string> = {
   'cortes': 'https://images.unsplash.com/photo-1503951914875-452162a0f6f1?q=80&w=800&auto=format&fit=crop',
@@ -26,7 +28,43 @@ const featuredToCategory: Record<string, string> = {
 
 export function FeaturedServicesSlider({ featuredImages }: FeaturedServicesSliderProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const images = { ...fallbackImages, ...featuredImages };
+  const [clientImages, setClientImages] = useState<Record<string, string> | null>(null);
+
+  useEffect(() => {
+    const appsScriptUrl = getAppsScriptUrl();
+    if (!appsScriptUrl) return;
+
+    fetch(`${appsScriptUrl}?action=getServices`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'success' && Array.isArray(data.data)) {
+          const categoryMap: Record<string, string> = {
+            cortes: 'cortes',
+            barba: 'barba',
+            facial: 'facial',
+            cabello: 'cabello',
+          };
+          const cacheBuster = data.timestamp || Date.now();
+          const images: Record<string, string> = {};
+          for (const category of data.data) {
+            const featId = categoryMap[category.id];
+            if (!featId) continue;
+            for (const s of category.services) {
+              if (s.image) {
+                images[featId] = directDriveUrl(s.image, cacheBuster);
+                break;
+              }
+            }
+          }
+          setClientImages(images);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const images = clientImages
+    ? { ...fallbackImages, ...clientImages }
+    : { ...fallbackImages, ...featuredImages };
 
   const scroll = (direction: 'left' | 'right') => {
     if (carouselRef.current) {

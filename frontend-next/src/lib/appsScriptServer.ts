@@ -7,7 +7,7 @@ async function fetchFromAppsScriptServer(endpoint: string) {
   }
 
   const url = `${getAppsScriptUrl()}?action=${endpoint}`;
-  const res = await fetch(url, { next: { revalidate: 3600 } });
+  const res = await fetch(url);
 
   if (!res.ok) {
     throw new Error(`Apps Script error: ${res.status}`);
@@ -26,7 +26,7 @@ export async function getServices() {
         ...cat,
         services: cat.services.map((s: any) => ({
           ...s,
-          image: s.image ? proxyDriveUrl(s.image, 'w1200') : undefined,
+          image: s.image || undefined,
         })),
       })),
     };
@@ -45,8 +45,6 @@ export async function getGallery() {
         ...response.data,
         images: response.data.images.map((img: any) => ({
           ...img,
-          url: proxyDriveUrl(img.url, 'w1000'),
-          thumbnailUrl: proxyDriveUrl(img.url, 'w400'),
         })),
       },
     };
