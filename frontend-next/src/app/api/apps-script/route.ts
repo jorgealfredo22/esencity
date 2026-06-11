@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAppsScriptUrl } from '@/lib/appsScriptConfig';
 
+export const runtime = 'edge';
+
 const ALLOWED_ACTIONS = new Set([
   'getServices',
   'getGallery',
