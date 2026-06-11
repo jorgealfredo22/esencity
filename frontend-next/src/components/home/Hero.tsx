@@ -35,25 +35,28 @@ export function Hero() {
         </div>
 
         <h1
-          className={`text-4xl md:text-5xl lg:text-6xl font-bold text-text-inverse font-display mb-4 transition-all duration-700 delay-200 ${
+          className={`font-bold text-text-inverse font-display mb-4 transition-all duration-700 delay-200 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
+          style={{ fontSize: 'clamp(1.5rem, 5vw, 3.75rem)', lineHeight: '1.2' }}
         >
           Esencity — Barbería y Salón de Belleza en Sogamoso
         </h1>
 
         <p
-          className={`text-lg md:text-xl text-text-inverse opacity-80 max-w-2xl mx-auto mb-4 font-light leading-relaxed transition-all duration-700 delay-300 ${
+          className={`text-text-inverse opacity-80 max-w-2xl mx-auto mb-4 font-light leading-relaxed transition-all duration-700 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
+          style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}
         >
           La belleza elevada a arte.
         </p>
 
         <p
-          className={`text-lg md:text-xl text-text-inverse opacity-80 max-w-2xl mx-auto mb-10 font-light leading-relaxed transition-all duration-700 delay-300 ${
+          className={`text-text-inverse opacity-80 max-w-2xl mx-auto mb-10 font-light leading-relaxed transition-all duration-700 delay-300 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
+          style={{ fontSize: 'clamp(1rem, 2.5vw, 1.25rem)' }}
         >
           Precisión, estilo y sensibilidad en cada transformación firmada por{' '}
           <strong className="text-secondary font-semibold">Esencity</strong>
