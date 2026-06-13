@@ -2,6 +2,8 @@
 
 Monorepo with two independent workspaces: Next.js frontend and Google Apps Script backend. Site for a Buenos Aires hair salon — content is in Spanish (es_AR), prices in ARS.
 
+> **¡ATENCIÓN AGENTES!** Antes de realizar cualquier tarea de despliegue en el frontend, debes leer obligatoriamente el archivo `AGENTS_CLOUDFLARE_WORKER.md`. Este proyecto se despliega como un Cloudflare Worker con Assets y tiene reglas estrictas para las imágenes y los comandos de despliegue.
+
 ## Workspaces
 
 | Directory | Type | Tech |
