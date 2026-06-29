@@ -79,7 +79,7 @@ export function FeaturedServicesSlider({ featuredImages }: FeaturedServicesSlide
         <SectionHeading
           subtitle="Lo Mejor para Ti"
           title="Nuestros Servicios"
-          description="Hacé clic en el servicio que deseas conocer y descubrí cómo transformamos la belleza en arte."
+          description="Haz clic en el servicio que deseas conocer y descubre cómo transformamos la belleza en arte."
           className="max-w-3xl mx-auto mb-12 md:mb-16"
         />
 

@@ -12,7 +12,7 @@ export function InstagramFeed() {
         <SectionHeading
           subtitle={`@${username}`}
           title="Conoce nuestros Resultados"
-          description="Seguí nuestras últimas transformaciones y descubrí por qué somos la mejor opción para tu look."
+          description="Sigue nuestras últimas transformaciones y descubre por qué somos la mejor opción para tu look."
           className="max-w-3xl mx-auto mb-12 md:mb-16"
         />
 
