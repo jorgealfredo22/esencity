@@ -26,11 +26,11 @@ export function ContactSection() {
           </div>
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-inverse font-display mb-4 leading-tight">
-            Descubrí el arte de tu belleza con Esencity
+            Descubre el arte de tu belleza con Esencity
           </h2>
 
           <p className="text-text-inverse/70 text-base md:text-lg mb-10 max-w-xl mx-auto">
-            Agendá tu cita y descubrí por qué la belleza, en manos expertas, se convierte en arte.
+            Agenda tu cita y descubre por qué la belleza, en manos expertas, se convierte en arte.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

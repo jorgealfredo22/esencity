@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Playfair_Display, Inter } from "next/font/google";
 import { siteConfig } from "@/data/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import icon2 from "./icon2.png";
 import "@/styles/animations.css";
 import "./globals.css";
 
@@ -61,6 +63,16 @@ export default function RootLayout({
         <Header />
         <main>{children}</main>
         <Footer />
+        <a
+          href="https://prigma.net"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: '#ffffff' }}
+          className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full bg-black/90 px-3 py-2 text-xs font-semibold shadow-xl shadow-black/30 transition hover:bg-black"
+        >
+          <Image src={icon2} alt="Prigma" width={20} height={20} className="h-5 w-5 rounded-full" />
+          Made by Prigma
+        </a>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
